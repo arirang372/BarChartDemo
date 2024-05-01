@@ -26,7 +26,6 @@ import com.github.mikephil.charting.jobs.AnimatedMoveViewJob;
 import com.github.mikephil.charting.jobs.AnimatedZoomJob;
 import com.github.mikephil.charting.jobs.MoveViewJob;
 import com.github.mikephil.charting.jobs.ZoomJob;
-//import com.github.mikephil.charting.listener.OnDrawListener;
 import com.github.mikephil.charting.renderer.XAxisRenderer;
 import com.github.mikephil.charting.renderer.YAxisRenderer;
 import com.github.mikephil.charting.utils.MPPointD;
@@ -35,7 +34,7 @@ import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.Utils;
 
 /**
- * Base-class of LineChart, BarChart, ScatterChart and CandleStickChart.
+ * Base-class of BarChart
  *
  * @author Philipp Jahoda
  */
@@ -111,11 +110,6 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
     protected boolean mKeepPositionOnRotation = false;
 
     /**
-     * the listener for user drawing on the chart
-     */
-//    protected OnDrawListener mDrawListener;
-
-    /**
      * the object representing the labels on the left y-axis
      */
     protected YAxis mAxisLeft;
@@ -165,7 +159,7 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
 
         setHighlighter(new ChartHighlighter(this));
 
-      //  mChartTouchListener = new BarLineChartTouchListener(this, mViewPortHandler.getMatrixTouch(), 3f);
+        //  mChartTouchListener = new BarLineChartTouchListener(this, mViewPortHandler.getMatrixTouch(), 3f);
 
         mGridBackgroundPaint = new Paint();
         mGridBackgroundPaint.setStyle(Style.FILL);
@@ -983,24 +977,6 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
             return mAxisRight.mAxisRange;
     }
 
-//    /**
-//     * Sets the OnDrawListener
-//     *
-//     * @param drawListener
-//     */
-//    public void setOnDrawListener(OnDrawListener drawListener) {
-//        this.mDrawListener = drawListener;
-//    }
-//
-//    /**
-//     * Gets the OnDrawListener. May be null.
-//     *
-//     * @return
-//     */
-//    public OnDrawListener getDrawListener() {
-//        return mDrawListener;
-//    }
-
     protected float[] mGetPositionBuffer = new float[2];
 
     /**
@@ -1205,8 +1181,8 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
 
     /**
      * When disabled, the data and/or highlights will not be clipped to contentRect. Disabling this option can
-     *   be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
-     *   that there is unwanted clipping.
+     * be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
+     * that there is unwanted clipping.
      *
      * @param enabled
      */
@@ -1226,8 +1202,8 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
 
     /**
      * When disabled, the data and/or highlights will not be clipped to contentRect. Disabling this option can
-     *   be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
-     *   that there is unwanted clipping.
+     * be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
+     * that there is unwanted clipping.
      *
      * @return
      */

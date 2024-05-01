@@ -17,18 +17,11 @@ import java.util.List;
  * @author Philipp Jahoda
  */
 public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatterCandleBubbleDataSet<? extends Entry>> {
-
-    //private LineData mLineData;
     private BarData mBarData;
-//    private ScatterData mScatterData;
-//    private CandleData mCandleData;
-//    private BubbleData mBubbleData;
 
     public CombinedData() {
         super();
     }
-
-
 
     public void setData(BarData data) {
         mBarData = data;
@@ -38,7 +31,7 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
     @Override
     public void calcMinMax() {
 
-        if(mDataSets == null){
+        if (mDataSets == null) {
             mDataSets = new ArrayList<>();
         }
         mDataSets.clear();
@@ -75,7 +68,7 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
                 mXMin = data.getXMin();
 
             for (IBarLineScatterCandleBubbleDataSet<? extends Entry> dataset : sets) {
-                if (dataset.getAxisDependency() == YAxis.AxisDependency.LEFT)  {
+                if (dataset.getAxisDependency() == YAxis.AxisDependency.LEFT) {
                     if (dataset.getYMax() > mLeftAxisMax) {
                         mLeftAxisMax = dataset.getYMax();
                     }
@@ -83,8 +76,7 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
                     if (dataset.getYMin() < mLeftAxisMin) {
                         mLeftAxisMin = dataset.getYMin();
                     }
-                }
-                else {
+                } else {
                     if (dataset.getYMax() > mRightAxisMax) {
                         mRightAxisMax = dataset.getYMax();
                     }
@@ -98,11 +90,9 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
     }
 
 
-
     public BarData getBarData() {
         return mBarData;
     }
-
 
 
     /**
