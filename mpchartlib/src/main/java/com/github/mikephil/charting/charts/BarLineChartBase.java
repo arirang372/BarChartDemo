@@ -26,7 +26,7 @@ import com.github.mikephil.charting.jobs.AnimatedMoveViewJob;
 import com.github.mikephil.charting.jobs.AnimatedZoomJob;
 import com.github.mikephil.charting.jobs.MoveViewJob;
 import com.github.mikephil.charting.jobs.ZoomJob;
-import com.github.mikephil.charting.listener.OnDrawListener;
+//import com.github.mikephil.charting.listener.OnDrawListener;
 import com.github.mikephil.charting.renderer.XAxisRenderer;
 import com.github.mikephil.charting.renderer.YAxisRenderer;
 import com.github.mikephil.charting.utils.MPPointD;
@@ -113,7 +113,7 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
     /**
      * the listener for user drawing on the chart
      */
-    protected OnDrawListener mDrawListener;
+//    protected OnDrawListener mDrawListener;
 
     /**
      * the object representing the labels on the left y-axis
@@ -983,23 +983,23 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
             return mAxisRight.mAxisRange;
     }
 
-    /**
-     * Sets the OnDrawListener
-     *
-     * @param drawListener
-     */
-    public void setOnDrawListener(OnDrawListener drawListener) {
-        this.mDrawListener = drawListener;
-    }
-
-    /**
-     * Gets the OnDrawListener. May be null.
-     *
-     * @return
-     */
-    public OnDrawListener getDrawListener() {
-        return mDrawListener;
-    }
+//    /**
+//     * Sets the OnDrawListener
+//     *
+//     * @param drawListener
+//     */
+//    public void setOnDrawListener(OnDrawListener drawListener) {
+//        this.mDrawListener = drawListener;
+//    }
+//
+//    /**
+//     * Gets the OnDrawListener. May be null.
+//     *
+//     * @return
+//     */
+//    public OnDrawListener getDrawListener() {
+//        return mDrawListener;
+//    }
 
     protected float[] mGetPositionBuffer = new float[2];
 

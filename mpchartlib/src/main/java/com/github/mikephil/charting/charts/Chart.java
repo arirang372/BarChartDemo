@@ -33,8 +33,6 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.highlight.IHighlighter;
 import com.github.mikephil.charting.interfaces.dataprovider.ChartInterface;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.renderer.DataRenderer;
 import com.github.mikephil.charting.renderer.LegendRenderer;
 import com.github.mikephil.charting.utils.MPPointF;
@@ -127,7 +125,7 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
     /**
      * listener that is called when a value on the chart is selected
      */
-    protected OnChartValueSelectedListener mSelectionListener;
+//    protected OnChartValueSelectedListener mSelectionListener;
 
    // protected ChartTouchListener mChartTouchListener;
 
@@ -139,7 +137,7 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
     /**
      * Gesture listener for custom callbacks when making gestures on the chart.
      */
-    private OnChartGestureListener mGestureListener;
+//    private OnChartGestureListener mGestureListener;
 
     protected LegendRenderer mLegendRenderer;
 
@@ -666,17 +664,6 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
         }
 
         setLastHighlighted(mIndicesToHighlight);
-
-        if (callListener && mSelectionListener != null) {
-
-            if (!valuesToHighlight())
-                mSelectionListener.onNothingSelected();
-            else {
-                // notify the listener
-                mSelectionListener.onValueSelected(e, high);
-            }
-        }
-
         // redraw the chart
         invalidate();
     }
@@ -963,34 +950,6 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      */
     public IValueFormatter getDefaultValueFormatter() {
         return mDefaultValueFormatter;
-    }
-
-    /**
-     * set a selection listener for the chart
-     *
-     * @param l
-     */
-    public void setOnChartValueSelectedListener(OnChartValueSelectedListener l) {
-        this.mSelectionListener = l;
-    }
-
-    /**
-     * Sets a gesture-listener for the chart for custom callbacks when executing
-     * gestures on the chart surface.
-     *
-     * @param l
-     */
-    public void setOnChartGestureListener(OnChartGestureListener l) {
-        this.mGestureListener = l;
-    }
-
-    /**
-     * Returns the custom gesture listener.
-     *
-     * @return
-     */
-    public OnChartGestureListener getOnChartGestureListener() {
-        return mGestureListener;
     }
 
     /**

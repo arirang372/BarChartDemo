@@ -1,10 +1,7 @@
 
 package com.john.barchartdemo;
 
-import android.graphics.RectF;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -14,21 +11,16 @@ import androidx.core.content.ContextCompat;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.Legend.LegendForm;
-import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.Fill;
-import com.github.mikephil.charting.utils.MPPointF;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class BarChartActivity extends DemoBase implements OnSeekBarChangeListener,
-        OnChartValueSelectedListener {
+public class BarChartActivity extends DemoBase implements OnSeekBarChangeListener {
 
     private BarChart chart;
     private SeekBar seekBarX, seekBarY;
@@ -52,7 +44,7 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
         seekBarX.setOnSeekBarChangeListener(this);
 
         chart = findViewById(R.id.chart1);
-        chart.setOnChartValueSelectedListener(this);
+        // chart.setOnChartValueSelectedListener(this);
 
         chart.setDrawBarShadow(false);
         chart.setDrawValueAboveBar(true);
@@ -78,6 +70,8 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
         l.setTextSize(11f);
         l.setXEntrySpace(4f);
 
+        setData(5, 10);
+
 
         // setting data
         seekBarY.setProgress(50);
@@ -96,7 +90,7 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
             float val = (float) (Math.random() * (range + 1));
 
             if (Math.random() * 100 < 25) {
-                values.add(new BarEntry(i, val, getResources().getDrawable(R.drawable.star)));
+                values.add(new BarEntry(i, val));
             } else {
                 values.add(new BarEntry(i, val));
             }
@@ -141,7 +135,7 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
 
             BarData data = new BarData(dataSets);
             data.setValueTextSize(10f);
-           // data.setValueTypeface(tfLight);
+            // data.setValueTypeface(tfLight);
             data.setBarWidth(0.9f);
 
             chart.setData(data);
@@ -152,10 +146,10 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-        tvX.setText(String.valueOf(seekBarX.getProgress()));
-        tvY.setText(String.valueOf(seekBarY.getProgress()));
-
-        setData(seekBarX.getProgress(), seekBarY.getProgress());
+//        tvX.setText(String.valueOf(seekBarX.getProgress()));
+//        tvY.setText(String.valueOf(seekBarY.getProgress()));
+//
+//        setData(seekBarX.getProgress(), seekBarY.getProgress());
         chart.invalidate();
     }
 
@@ -165,33 +159,11 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
     }
 
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {}
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {}
-
-    private final RectF onValueSelectedRectF = new RectF();
-
-    @Override
-    public void onValueSelected(Entry e, Highlight h) {
-
-        if (e == null)
-            return;
-
-        RectF bounds = onValueSelectedRectF;
-        chart.getBarBounds((BarEntry) e, bounds);
-        MPPointF position = chart.getPosition(e, AxisDependency.LEFT);
-
-        Log.i("bounds", bounds.toString());
-        Log.i("position", position.toString());
-
-        Log.i("x-index",
-                "low: " + chart.getLowestVisibleX() + ", high: "
-                        + chart.getHighestVisibleX());
-
-        MPPointF.recycleInstance(position);
+    public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
     @Override
-    public void onNothingSelected() { }
+    public void onStopTrackingTouch(SeekBar seekBar) {
+    }
+
 }
