@@ -2,9 +2,6 @@
 package com.john.barchartdemo;
 
 import android.os.Bundle;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
@@ -20,11 +17,9 @@ import com.github.mikephil.charting.utils.Fill;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BarChartActivity extends DemoBase implements OnSeekBarChangeListener {
+public class BarChartActivity extends DemoBase {
 
     private BarChart chart;
-    private SeekBar seekBarX, seekBarY;
-    private TextView tvX, tvY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +28,6 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
         setContentView(R.layout.activity_barchart);
 
         setTitle("BarChartActivity");
-
-        tvX = findViewById(R.id.tvXMax);
-        tvY = findViewById(R.id.tvYMax);
-
-        seekBarX = findViewById(R.id.seekBar1);
-        seekBarY = findViewById(R.id.seekBar2);
-
-        seekBarY.setOnSeekBarChangeListener(this);
-        seekBarX.setOnSeekBarChangeListener(this);
 
         chart = findViewById(R.id.chart1);
         // chart.setOnChartValueSelectedListener(this);
@@ -70,31 +56,18 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
         l.setTextSize(11f);
         l.setXEntrySpace(4f);
 
-        setData(5, 10);
-
-
-        // setting data
-        seekBarY.setProgress(50);
-        seekBarX.setProgress(12);
+        setData();
 
         // chart.setDrawLegend(false);
     }
 
-    private void setData(int count, float range) {
-
-        float start = 1f;
-
-        ArrayList<BarEntry> values = new ArrayList<>();
-
-        for (int i = (int) start; i < start + count; i++) {
-            float val = (float) (Math.random() * (range + 1));
-
-            if (Math.random() * 100 < 25) {
-                values.add(new BarEntry(i, val));
-            } else {
-                values.add(new BarEntry(i, val));
-            }
-        }
+    private void setData() {
+        List<BarEntry> values = new ArrayList<>();
+        values.add(new BarEntry(1f, 10));
+        values.add(new BarEntry(2f, 20));
+        values.add(new BarEntry(3f, 50));
+        values.add(new BarEntry(4f, 20));
+        values.add(new BarEntry(5f, 40));
 
         BarDataSet set1;
 
@@ -142,28 +115,8 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
         }
     }
 
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-//        tvX.setText(String.valueOf(seekBarX.getProgress()));
-//        tvY.setText(String.valueOf(seekBarY.getProgress()));
-//
-//        setData(seekBarX.getProgress(), seekBarY.getProgress());
-        chart.invalidate();
-    }
-
     @Override
     protected void saveToGallery() {
         saveToGallery(chart, "BarChartActivity");
     }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-    }
-
 }
