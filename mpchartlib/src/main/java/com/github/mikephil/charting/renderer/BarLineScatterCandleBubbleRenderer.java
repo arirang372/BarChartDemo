@@ -1,6 +1,5 @@
 package com.github.mikephil.charting.renderer;
 
-import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.interfaces.dataprovider.BarLineScatterCandleBubbleDataProvider;
@@ -18,8 +17,8 @@ public abstract class BarLineScatterCandleBubbleRenderer extends DataRenderer {
      */
     protected XBounds mXBounds = new XBounds();
 
-    public BarLineScatterCandleBubbleRenderer(ChartAnimator animator, ViewPortHandler viewPortHandler) {
-        super(animator, viewPortHandler);
+    public BarLineScatterCandleBubbleRenderer(ViewPortHandler viewPortHandler) {
+        super(viewPortHandler);
     }
 
     /**
@@ -46,7 +45,7 @@ public abstract class BarLineScatterCandleBubbleRenderer extends DataRenderer {
 
         float entryIndex = set.getEntryIndex(e);
 
-        if (e == null || entryIndex >= set.getEntryCount() * mAnimator.getPhaseX()) {
+        if (e == null || entryIndex >= set.getEntryCount()) {
             return false;
         } else {
             return true;
@@ -80,7 +79,7 @@ public abstract class BarLineScatterCandleBubbleRenderer extends DataRenderer {
          * @param dataSet
          */
         public void set(BarLineScatterCandleBubbleDataProvider chart, IBarLineScatterCandleBubbleDataSet dataSet) {
-            float phaseX = Math.max(0.f, Math.min(1.f, mAnimator.getPhaseX()));
+            float phaseX = Math.max(0.f, 1.f);
 
             float low = chart.getLowestVisibleX();
             float high = chart.getHighestVisibleX();

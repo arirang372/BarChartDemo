@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 
-import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.buffer.BarBuffer;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarEntry;
@@ -37,9 +36,9 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
     protected Paint mShadowPaint;
     protected Paint mBarBorderPaint;
 
-    public BarChartRenderer(BarDataProvider chart, ChartAnimator animator,
+    public BarChartRenderer(BarDataProvider chart,
                             ViewPortHandler viewPortHandler) {
-        super(animator, viewPortHandler);
+        super(viewPortHandler);
         this.mChart = chart;
 
         mHighlightPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -94,9 +93,6 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
 
         final boolean drawBorder = dataSet.getBarBorderWidth() > 0.f;
 
-        float phaseX = mAnimator.getPhaseX();
-        float phaseY = mAnimator.getPhaseY();
-
         // draw the bar shadow before the values
         if (mChart.isDrawBarShadowEnabled()) {
             mShadowPaint.setColor(dataSet.getBarShadowColor());
@@ -107,7 +103,7 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
             final float barWidthHalf = barWidth / 2.0f;
             float x;
 
-            for (int i = 0, count = Math.min((int)(Math.ceil((float)(dataSet.getEntryCount()) * phaseX)), dataSet.getEntryCount());
+            for (int i = 0, count = Math.min((int)(Math.ceil((float)(dataSet.getEntryCount()))), dataSet.getEntryCount());
                 i < count;
                 i++) {
 
@@ -135,7 +131,6 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
 
         // initialize the buffer
         BarBuffer buffer = mBarBuffers[index];
-        buffer.setPhases(phaseX, phaseY);
         buffer.setDataSet(index);
         buffer.setInverted(mChart.isInverted(dataSet.getAxisDependency()));
         buffer.setBarWidth(mChart.getBarData().getBarWidth());
@@ -197,7 +192,7 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
 
         mBarRect.set(left, top, right, bottom);
 
-        trans.rectToPixelPhase(mBarRect, mAnimator.getPhaseY());
+        trans.rectToPixelPhase(mBarRect);
     }
 
     @Override
@@ -239,8 +234,6 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
                 // get the buffer
                 BarBuffer buffer = mBarBuffers[i];
 
-                final float phaseY = mAnimator.getPhaseY();
-
                 MPPointF iconsOffset = MPPointF.getInstance(dataSet.getIconsOffset());
                 iconsOffset.x = Utils.convertDpToPixel(iconsOffset.x);
                 iconsOffset.y = Utils.convertDpToPixel(iconsOffset.y);
@@ -248,7 +241,7 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
                 // if only single values are drawn (sum)
                 if (!dataSet.isStacked()) {
 
-                    for (int j = 0; j < buffer.buffer.length * mAnimator.getPhaseX(); j += 4) {
+                    for (int j = 0; j < buffer.buffer.length; j += 4) {
 
                         float x = (buffer.buffer[j] + buffer.buffer[j + 2]) / 2f;
 
@@ -300,7 +293,7 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
                     int bufferIndex = 0;
                     int index = 0;
 
-                    while (index < dataSet.getEntryCount() * mAnimator.getPhaseX()) {
+                    while (index < dataSet.getEntryCount()) {
 
                         BarEntry entry = dataSet.getEntryForIndex(index);
 
@@ -372,7 +365,7 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
                                     negY -= value;
                                 }
 
-                                transformed[k + 1] = y * phaseY;
+                                transformed[k + 1] = y;
                             }
 
                             trans.pointValuesToPixel(transformed);

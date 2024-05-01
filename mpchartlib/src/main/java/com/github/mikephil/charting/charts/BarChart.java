@@ -54,7 +54,7 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
     protected void init() {
         super.init();
 
-        mRenderer = new BarChartRenderer(this, mAnimator, mViewPortHandler);
+        mRenderer = new BarChartRenderer(this, mViewPortHandler);
 
         setHighlighter(new BarHighlighter(this));
 

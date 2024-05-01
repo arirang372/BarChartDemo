@@ -230,14 +230,10 @@ public class Transformer {
      * Transform a rectangle with all matrices with potential animation phases.
      *
      * @param r
-     * @param phaseY
      */
-    public void rectToPixelPhase(RectF r, float phaseY) {
+    public void rectToPixelPhase(RectF r) {
 
         // multiply the height of the rect with the phase
-        r.top *= phaseY;
-        r.bottom *= phaseY;
-
         mMatrixValueToPx.mapRect(r);
         mViewPortHandler.getMatrixTouch().mapRect(r);
         mMatrixOffset.mapRect(r);

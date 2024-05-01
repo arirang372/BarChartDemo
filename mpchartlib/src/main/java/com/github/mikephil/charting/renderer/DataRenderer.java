@@ -6,15 +6,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
-import android.graphics.drawable.Drawable;
 
-import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.ChartInterface;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
-import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Utils;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
@@ -24,12 +21,6 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
  * @author Philipp Jahoda
  */
 public abstract class DataRenderer extends Renderer {
-
-    /**
-     * the animator object used to perform animations on the chart data
-     */
-    protected ChartAnimator mAnimator;
-
     /**
      * main paint object used for rendering
      */
@@ -48,9 +39,8 @@ public abstract class DataRenderer extends Renderer {
      */
     protected Paint mValuePaint;
 
-    public DataRenderer(ChartAnimator animator, ViewPortHandler viewPortHandler) {
+    public DataRenderer(ViewPortHandler viewPortHandler) {
         super(viewPortHandler);
-        this.mAnimator = animator;
 
         mRenderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mRenderPaint.setStyle(Style.FILL);
