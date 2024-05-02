@@ -16,7 +16,6 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.highlight.ChartHighlighter;
 import com.github.mikephil.charting.interfaces.dataprovider.BarLineScatterCandleBubbleDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IBarLineScatterCandleBubbleDataSet;
 import com.github.mikephil.charting.renderer.XAxisRenderer;
@@ -52,27 +51,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
      * separately
      */
     protected boolean mPinchZoomEnabled = false;
-
-    /**
-     * flag that indicates if double tap zoom is enabled or not
-     */
-    protected boolean mDoubleTapToZoomEnabled = true;
-
-    /**
-     * flag that indicates if highlighting per dragging over a fully zoomed out
-     * chart is enabled
-     */
-    protected boolean mHighlightPerDragEnabled = true;
-
-    /**
-     * if true, dragging is enabled for the chart
-     */
-    private boolean mDragXEnabled = true;
-    private boolean mDragYEnabled = true;
-
-    private boolean mScaleXEnabled = true;
-    private boolean mScaleYEnabled = true;
-
     /**
      * paint object for the (by default) lightgrey background of the grid
      */
@@ -146,9 +124,7 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
 
         mXAxisRenderer = new XAxisRenderer(mViewPortHandler, mXAxis, mLeftAxisTransformer);
 
-        setHighlighter(new ChartHighlighter(this));
-
-        //  mChartTouchListener = new BarLineChartTouchListener(this, mViewPortHandler.getMatrixTouch(), 3f);
+        //setHighlighter(new ChartHighlighter(this));
 
         mGridBackgroundPaint = new Paint();
         mGridBackgroundPaint.setStyle(Style.FILL);
@@ -230,11 +206,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
 
         if (!mAxisRight.isDrawGridLinesBehindDataEnabled())
             mAxisRendererRight.renderGridLines(canvas);
-
-        // if highlighting is enabled
-        if (valuesToHighlight())
-            mRenderer.drawHighlighted(canvas, mIndicesToHighlight);
-
         // Removes clipping rectangle
         canvas.restoreToCount(clipRestoreCount);
 

@@ -9,7 +9,7 @@ import android.graphics.Paint.Style;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
+//import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.ChartInterface;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.utils.Utils;
@@ -155,5 +155,5 @@ public abstract class DataRenderer extends Renderer {
      * @param c
      * @param indices the highlighted values
      */
-    public abstract void drawHighlighted(Canvas c, Highlight[] indices);
+   // public abstract void drawHighlighted(Canvas c, Highlight[] indices);
 }

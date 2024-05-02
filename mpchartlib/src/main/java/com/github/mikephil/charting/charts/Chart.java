@@ -26,9 +26,9 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.DefaultValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.highlight.ChartHighlighter;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.highlight.IHighlighter;
+//import com.github.mikephil.charting.highlight.ChartHighlighter;
+//import com.github.mikephil.charting.highlight.Highlight;
+//import com.github.mikephil.charting.highlight.IHighlighter;
 import com.github.mikephil.charting.interfaces.dataprovider.ChartInterface;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.renderer.DataRenderer;
@@ -121,7 +121,7 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      */
     protected DataRenderer mRenderer;
 
-    protected IHighlighter mHighlighter;
+  //  protected IHighlighter mHighlighter;
 
     /**
      * object that manages the bounds and drawing constraints of the chart
@@ -223,12 +223,12 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      * Clears the chart from all data (sets it to null) and refreshes it (by
      * calling invalidate()).
      */
-    public void clear() {
-        mData = null;
-        mOffsetsCalculated = false;
-        mIndicesToHighlight = null;
-        invalidate();
-    }
+//    public void clear() {
+//        mData = null;
+//        mOffsetsCalculated = false;
+//        //mIndicesToHighlight = null;
+//        invalidate();
+//    }
 
     /**
      * Lets the chart know its underlying data has changed and performs all
@@ -353,7 +353,7 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      * array of Highlight objects that reference the highlighted slices in the
      * chart
      */
-    protected Highlight[] mIndicesToHighlight;
+   // protected Highlight[] mIndicesToHighlight;
 
     /**
      * The maximum distance in dp away from an entry causing it to highlight.
@@ -372,11 +372,11 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      *
      * @return
      */
-    public boolean valuesToHighlight() {
-        return mIndicesToHighlight == null || mIndicesToHighlight.length <= 0
-                || mIndicesToHighlight[0] == null ? false
-                : true;
-    }
+//    public boolean valuesToHighlight() {
+//        return mIndicesToHighlight == null || mIndicesToHighlight.length <= 0
+//                || mIndicesToHighlight[0] == null ? false
+//                : true;
+//    }
 
     /**
      * ################ ################ ################ ################
@@ -737,19 +737,19 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
             mRenderer = renderer;
     }
 
-    public IHighlighter getHighlighter() {
-        return mHighlighter;
-    }
-
-    /**
-     * Sets a custom highligher object for the chart that handles / processes
-     * all highlight touch events performed on the chart-view.
-     *
-     * @param highlighter
-     */
-    public void setHighlighter(ChartHighlighter highlighter) {
-        mHighlighter = highlighter;
-    }
+//    public IHighlighter getHighlighter() {
+//        return mHighlighter;
+//    }
+//
+//    /**
+//     * Sets a custom highligher object for the chart that handles / processes
+//     * all highlight touch events performed on the chart-view.
+//     *
+//     * @param highlighter
+//     */
+//    public void setHighlighter(ChartHighlighter highlighter) {
+//        mHighlighter = highlighter;
+//    }
 
     /**
      * Returns a recyclable MPPointF instance.

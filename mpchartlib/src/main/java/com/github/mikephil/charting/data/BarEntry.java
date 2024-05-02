@@ -3,7 +3,7 @@ package com.github.mikephil.charting.data;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 
-import com.github.mikephil.charting.highlight.Range;
+//import com.github.mikephil.charting.highlight.Range;
 
 /**
  * Entry class for the BarChart. (especially stacked bars)
@@ -21,7 +21,7 @@ public class BarEntry extends Entry {
     /**
      * the ranges for the individual stack values - automatically calculated
      */
-    private Range[] mRanges;
+    //private Range[] mRanges;
 
     /**
      * the sum of all negative values this entry (if stacked) contains
@@ -88,7 +88,7 @@ public class BarEntry extends Entry {
 
         this.mYVals = vals;
         calcPosNegSum();
-        calcRanges();
+      //  calcRanges();
     }
 
     /**
@@ -103,7 +103,7 @@ public class BarEntry extends Entry {
 
         this.mYVals = vals;
         calcPosNegSum();
-        calcRanges();
+      //  calcRanges();
     }
 
     /**
@@ -118,7 +118,7 @@ public class BarEntry extends Entry {
 
         this.mYVals = vals;
         calcPosNegSum();
-        calcRanges();
+        //calcRanges();
     }
 
     /**
@@ -134,7 +134,7 @@ public class BarEntry extends Entry {
 
         this.mYVals = vals;
         calcPosNegSum();
-        calcRanges();
+      //  calcRanges();
     }
 
     /**
@@ -166,7 +166,7 @@ public class BarEntry extends Entry {
         setY(calcSum(vals));
         mYVals = vals;
         calcPosNegSum();
-        calcRanges();
+        //calcRanges();
     }
 
     /**
@@ -184,9 +184,9 @@ public class BarEntry extends Entry {
      *
      * @return
      */
-    public Range[] getRanges() {
-        return mRanges;
-    }
+//    public Range[] getRanges() {
+//        return mRanges;
+//    }
 
     /**
      * Returns true if this BarEntry is stacked (has a values array), false if not.
@@ -280,31 +280,31 @@ public class BarEntry extends Entry {
         return sum;
     }
 
-    protected void calcRanges() {
-
-        float[] values = getYVals();
-
-        if (values == null || values.length == 0)
-            return;
-
-        mRanges = new Range[values.length];
-
-        float negRemain = -getNegativeSum();
-        float posRemain = 0f;
-
-        for (int i = 0; i < mRanges.length; i++) {
-
-            float value = values[i];
-
-            if (value < 0) {
-                mRanges[i] = new Range(negRemain, negRemain - value);
-                negRemain -= value;
-            } else {
-                mRanges[i] = new Range(posRemain, posRemain + value);
-                posRemain += value;
-            }
-        }
-    }
+//    protected void calcRanges() {
+//
+//        float[] values = getYVals();
+//
+//        if (values == null || values.length == 0)
+//            return;
+//
+//        mRanges = new Range[values.length];
+//
+//        float negRemain = -getNegativeSum();
+//        float posRemain = 0f;
+//
+//        for (int i = 0; i < mRanges.length; i++) {
+//
+//            float value = values[i];
+//
+//            if (value < 0) {
+//                mRanges[i] = new Range(negRemain, negRemain - value);
+//                negRemain -= value;
+//            } else {
+//                mRanges[i] = new Range(posRemain, posRemain + value);
+//                posRemain += value;
+//            }
+//        }
+//    }
 }
 
 

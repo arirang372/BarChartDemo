@@ -3,13 +3,10 @@ package com.github.mikephil.charting.charts;
 import android.content.Context;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.highlight.BarHighlighter;
-import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.BarDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.renderer.BarChartRenderer;
@@ -56,7 +53,7 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
 
         mRenderer = new BarChartRenderer(this, mViewPortHandler);
 
-        setHighlighter(new BarHighlighter(this));
+        //  setHighlighter(new BarHighlighter(this));
 
         getXAxis().setSpaceMin(0.5f);
         getXAxis().setSpaceMax(0.5f);
@@ -75,46 +72,6 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
         mAxisLeft.calculate(mData.getYMin(YAxis.AxisDependency.LEFT), mData.getYMax(YAxis.AxisDependency.LEFT));
         mAxisRight.calculate(mData.getYMin(YAxis.AxisDependency.RIGHT), mData.getYMax(YAxis.AxisDependency
                 .RIGHT));
-    }
-
-    /**
-     * Returns the Highlight object (contains x-index and DataSet index) of the selected value at the given touch
-     * point
-     * inside the BarChart.
-     *
-     * @param x
-     * @param y
-     * @return
-     */
-    public Highlight getHighlightByTouchPoint(float x, float y) {
-
-        if (mData == null) {
-            Log.e(LOG_TAG, "Can't select by touch. No data set.");
-            return null;
-        } else {
-            Highlight h = getHighlighter().getHighlight(x, y);
-            if (h == null || !isHighlightFullBarEnabled()) return h;
-
-            // For isHighlightFullBarEnabled, remove stackIndex
-            return new Highlight(h.getX(), h.getY(),
-                    h.getXPx(), h.getYPx(),
-                    h.getDataSetIndex(), -1, h.getAxis());
-        }
-    }
-
-    /**
-     * Returns the bounding box of the specified Entry in the specified DataSet. Returns null if the Entry could not be
-     * found in the charts data.  Performance-intensive code should use void getBarBounds(BarEntry, RectF) instead.
-     *
-     * @param e
-     * @return
-     */
-    public RectF getBarBounds(BarEntry e) {
-
-        RectF bounds = new RectF();
-        getBarBounds(e, bounds);
-
-        return bounds;
     }
 
     /**
