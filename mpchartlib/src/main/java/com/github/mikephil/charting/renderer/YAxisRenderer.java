@@ -7,7 +7,6 @@ import android.graphics.Paint.Align;
 import android.graphics.Path;
 import android.graphics.RectF;
 
-import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.components.YAxis.YAxisLabelPosition;
@@ -15,8 +14,6 @@ import com.github.mikephil.charting.utils.MPPointD;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.Utils;
 import com.github.mikephil.charting.utils.ViewPortHandler;
-
-import java.util.List;
 
 public class YAxisRenderer extends AxisRenderer {
 
@@ -29,7 +26,7 @@ public class YAxisRenderer extends AxisRenderer {
 
         this.mYAxis = yAxis;
 
-        if(mViewPortHandler != null) {
+        if (mViewPortHandler != null) {
 
             mAxisLabelPaint.setColor(Color.BLACK);
             mAxisLabelPaint.setTextSize(Utils.convertDpToPixel(10f));
@@ -134,6 +131,7 @@ public class YAxisRenderer extends AxisRenderer {
     }
 
     protected Path mRenderGridLinesPath = new Path();
+
     @Override
     public void renderGridLines(Canvas c) {
 
@@ -195,6 +193,7 @@ public class YAxisRenderer extends AxisRenderer {
     }
 
     protected float[] mGetTransformedPositionsBuffer = new float[2];
+
     /**
      * Transforms the values contained in the axis entries to screen pixels and returns them in form of a float array
      * of x- and y-coordinates.
@@ -203,7 +202,7 @@ public class YAxisRenderer extends AxisRenderer {
      */
     protected float[] getTransformedPositions() {
 
-        if(mGetTransformedPositionsBuffer.length != mYAxis.mEntryCount * 2){
+        if (mGetTransformedPositionsBuffer.length != mYAxis.mEntryCount * 2) {
             mGetTransformedPositionsBuffer = new float[mYAxis.mEntryCount * 2];
         }
         float[] positions = mGetTransformedPositionsBuffer;
@@ -246,107 +245,5 @@ public class YAxisRenderer extends AxisRenderer {
         c.drawPath(zeroLinePath, mZeroLinePaint);
 
         c.restoreToCount(clipRestoreCount);
-    }
-
-    protected Path mRenderLimitLines = new Path();
-    protected float[] mRenderLimitLinesBuffer = new float[2];
-    protected RectF mLimitLineClippingRect = new RectF();
-    /**
-     * Draws the LimitLines associated with this axis to the screen.
-     *
-     * @param c
-     */
-    @Override
-    public void renderLimitLines(Canvas c) {
-
-        List<LimitLine> limitLines = mYAxis.getLimitLines();
-
-        if (limitLines == null || limitLines.size() <= 0)
-            return;
-
-        float[] pts = mRenderLimitLinesBuffer;
-        pts[0] = 0;
-        pts[1] = 0;
-        Path limitLinePath = mRenderLimitLines;
-        limitLinePath.reset();
-
-        for (int i = 0; i < limitLines.size(); i++) {
-
-            LimitLine l = limitLines.get(i);
-
-            if (!l.isEnabled())
-                continue;
-
-            int clipRestoreCount = c.save();
-            mLimitLineClippingRect.set(mViewPortHandler.getContentRect());
-            mLimitLineClippingRect.inset(0.f, -l.getLineWidth());
-            c.clipRect(mLimitLineClippingRect);
-
-            mLimitLinePaint.setStyle(Paint.Style.STROKE);
-            mLimitLinePaint.setColor(l.getLineColor());
-            mLimitLinePaint.setStrokeWidth(l.getLineWidth());
-            mLimitLinePaint.setPathEffect(l.getDashPathEffect());
-
-            pts[1] = l.getLimit();
-
-            mTrans.pointValuesToPixel(pts);
-
-            limitLinePath.moveTo(mViewPortHandler.contentLeft(), pts[1]);
-            limitLinePath.lineTo(mViewPortHandler.contentRight(), pts[1]);
-
-            c.drawPath(limitLinePath, mLimitLinePaint);
-            limitLinePath.reset();
-            // c.drawLines(pts, mLimitLinePaint);
-
-            String label = l.getLabel();
-
-            // if drawing the limit-value label is enabled
-            if (label != null && !label.equals("")) {
-
-                mLimitLinePaint.setStyle(l.getTextStyle());
-                mLimitLinePaint.setPathEffect(null);
-                mLimitLinePaint.setColor(l.getTextColor());
-                mLimitLinePaint.setTypeface(l.getTypeface());
-                mLimitLinePaint.setStrokeWidth(0.5f);
-                mLimitLinePaint.setTextSize(l.getTextSize());
-
-                final float labelLineHeight = Utils.calcTextHeight(mLimitLinePaint, label);
-                float xOffset = Utils.convertDpToPixel(4f) + l.getXOffset();
-                float yOffset = l.getLineWidth() + labelLineHeight + l.getYOffset();
-
-                final LimitLine.LimitLabelPosition position = l.getLabelPosition();
-
-                if (position == LimitLine.LimitLabelPosition.RIGHT_TOP) {
-
-                    mLimitLinePaint.setTextAlign(Align.RIGHT);
-                    c.drawText(label,
-                            mViewPortHandler.contentRight() - xOffset,
-                            pts[1] - yOffset + labelLineHeight, mLimitLinePaint);
-
-                } else if (position == LimitLine.LimitLabelPosition.RIGHT_BOTTOM) {
-
-                    mLimitLinePaint.setTextAlign(Align.RIGHT);
-                    c.drawText(label,
-                            mViewPortHandler.contentRight() - xOffset,
-                            pts[1] + yOffset, mLimitLinePaint);
-
-                } else if (position == LimitLine.LimitLabelPosition.LEFT_TOP) {
-
-                    mLimitLinePaint.setTextAlign(Align.LEFT);
-                    c.drawText(label,
-                            mViewPortHandler.contentLeft() + xOffset,
-                            pts[1] - yOffset + labelLineHeight, mLimitLinePaint);
-
-                } else {
-
-                    mLimitLinePaint.setTextAlign(Align.LEFT);
-                    c.drawText(label,
-                            mViewPortHandler.offsetLeft() + xOffset,
-                            pts[1] + yOffset, mLimitLinePaint);
-                }
-            }
-
-            c.restoreToCount(clipRestoreCount);
-        }
     }
 }

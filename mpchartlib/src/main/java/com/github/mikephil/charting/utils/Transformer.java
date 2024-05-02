@@ -81,101 +81,6 @@ public class Transformer {
         }
     }
 
-    protected float[] valuePointsForGenerateTransformedValuesScatter = new float[1];
-
-    /**
-     * Transforms an List of Entry into a float array containing the x and
-     * y values transformed with all matrices for the SCATTERCHART.
-     *
-     * @param data
-     * @return
-     */
-
-
-    protected float[] valuePointsForGenerateTransformedValuesBubble = new float[1];
-
-    /**
-     * Transforms an List of Entry into a float array containing the x and
-     * y values transformed with all matrices for the BUBBLECHART.
-     *
-     * @param data
-     * @return
-     */
-//    public float[] generateTransformedValuesBubble(IBubbleDataSet data, float phaseY, int from, int to) {
-//
-//        final int count = (to - from + 1) * 2; // (int) Math.ceil((to - from) * phaseX) * 2;
-//
-//        if (valuePointsForGenerateTransformedValuesBubble.length != count) {
-//            valuePointsForGenerateTransformedValuesBubble = new float[count];
-//        }
-//        float[] valuePoints = valuePointsForGenerateTransformedValuesBubble;
-//
-//        for (int j = 0; j < count; j += 2) {
-//
-//            Entry e = data.getEntryForIndex(j / 2 + from);
-//
-//            if (e != null) {
-//                valuePoints[j] = e.getX();
-//                valuePoints[j + 1] = e.getY() * phaseY;
-//            } else {
-//                valuePoints[j] = 0;
-//                valuePoints[j + 1] = 0;
-//            }
-//        }
-//
-//        getValueToPixelMatrix().mapPoints(valuePoints);
-//
-//        return valuePoints;
-//    }
-
-    protected float[] valuePointsForGenerateTransformedValuesLine = new float[1];
-
-    /**
-     * Transforms an List of Entry into a float array containing the x and
-     * y values transformed with all matrices for the LINECHART.
-     *
-     * @param data
-     * @return
-     */
-
-
-    protected float[] valuePointsForGenerateTransformedValuesCandle = new float[1];
-
-    /**
-     * Transforms an List of Entry into a float array containing the x and
-     * y values transformed with all matrices for the CANDLESTICKCHART.
-     *
-     * @param data
-     * @return
-     */
-//    public float[] generateTransformedValuesCandle(ICandleDataSet data,
-//                                                   float phaseX, float phaseY, int from, int to) {
-//
-//        final int count = (int) ((to - from) * phaseX + 1) * 2;
-//
-//        if (valuePointsForGenerateTransformedValuesCandle.length != count) {
-//            valuePointsForGenerateTransformedValuesCandle = new float[count];
-//        }
-//        float[] valuePoints = valuePointsForGenerateTransformedValuesCandle;
-//
-//        for (int j = 0; j < count; j += 2) {
-//
-//            CandleEntry e = data.getEntryForIndex(j / 2 + from);
-//
-//            if (e != null) {
-//                valuePoints[j] = e.getX();
-//                valuePoints[j + 1] = e.getHigh() * phaseY;
-//            } else {
-//                valuePoints[j] = 0;
-//                valuePoints[j + 1] = 0;
-//            }
-//        }
-//
-//        getValueToPixelMatrix().mapPoints(valuePoints);
-//
-//        return valuePoints;
-//    }
-
     /**
      * transform a path with all the given matrices VERY IMPORTANT: keep order
      * to value-touch-offset
@@ -239,58 +144,6 @@ public class Transformer {
         mMatrixOffset.mapRect(r);
     }
 
-    public void rectToPixelPhaseHorizontal(RectF r, float phaseY) {
-
-        // multiply the height of the rect with the phase
-        r.left *= phaseY;
-        r.right *= phaseY;
-
-        mMatrixValueToPx.mapRect(r);
-        mViewPortHandler.getMatrixTouch().mapRect(r);
-        mMatrixOffset.mapRect(r);
-    }
-
-    /**
-     * Transform a rectangle with all matrices with potential animation phases.
-     *
-     * @param r
-     */
-    public void rectValueToPixelHorizontal(RectF r) {
-
-        mMatrixValueToPx.mapRect(r);
-        mViewPortHandler.getMatrixTouch().mapRect(r);
-        mMatrixOffset.mapRect(r);
-    }
-
-    /**
-     * Transform a rectangle with all matrices with potential animation phases.
-     *
-     * @param r
-     * @param phaseY
-     */
-    public void rectValueToPixelHorizontal(RectF r, float phaseY) {
-
-        // multiply the height of the rect with the phase
-        r.left *= phaseY;
-        r.right *= phaseY;
-
-        mMatrixValueToPx.mapRect(r);
-        mViewPortHandler.getMatrixTouch().mapRect(r);
-        mMatrixOffset.mapRect(r);
-    }
-
-    /**
-     * transforms multiple rects with all matrices
-     *
-     * @param rects
-     */
-    public void rectValuesToPixel(List<RectF> rects) {
-
-        Matrix m = getValueToPixelMatrix();
-
-        for (int i = 0; i < rects.size(); i++)
-            m.mapRect(rects.get(i));
-    }
 
     protected Matrix mPixelToValueMatrixBuffer = new Matrix();
 
@@ -371,27 +224,4 @@ public class Transformer {
         return MPPointD.getInstance(xPx, yPx);
     }
 
-    public Matrix getValueMatrix() {
-        return mMatrixValueToPx;
-    }
-
-    public Matrix getOffsetMatrix() {
-        return mMatrixOffset;
-    }
-
-    private Matrix mMBuffer1 = new Matrix();
-
-    public Matrix getValueToPixelMatrix() {
-        mMBuffer1.set(mMatrixValueToPx);
-        mMBuffer1.postConcat(mViewPortHandler.mMatrixTouch);
-        mMBuffer1.postConcat(mMatrixOffset);
-        return mMBuffer1;
-    }
-
-    private Matrix mMBuffer2 = new Matrix();
-
-    public Matrix getPixelToValueMatrix() {
-        getValueToPixelMatrix().invert(mMBuffer2);
-        return mMBuffer2;
-    }
 }

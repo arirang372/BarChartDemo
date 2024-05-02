@@ -86,7 +86,6 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
      * @param y
      * @return
      */
-    @Override
     public Highlight getHighlightByTouchPoint(float x, float y) {
 
         if (mData == null) {
@@ -208,51 +207,8 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
         return mHighlightFullBarEnabled;
     }
 
-    /**
-     * Highlights the value at the given x-value in the given DataSet. Provide
-     * -1 as the dataSetIndex to undo all highlighting.
-     *
-     * @param x
-     * @param dataSetIndex
-     * @param stackIndex   the index inside the stack - only relevant for stacked entries
-     */
-    public void highlightValue(float x, int dataSetIndex, int stackIndex) {
-        highlightValue(new Highlight(x, dataSetIndex, stackIndex), false);
-    }
-
     @Override
     public BarData getBarData() {
         return mData;
-    }
-
-    /**
-     * Adds half of the bar width to each side of the x-axis range in order to allow the bars of the barchart to be
-     * fully displayed.
-     * Default: false
-     *
-     * @param enabled
-     */
-    public void setFitBars(boolean enabled) {
-        mFitBars = enabled;
-    }
-
-    /**
-     * Groups all BarDataSet objects this data object holds together by modifying the x-value of their entries.
-     * Previously set x-values of entries will be overwritten. Leaves space between bars and groups as specified
-     * by the parameters.
-     * Calls notifyDataSetChanged() afterwards.
-     *
-     * @param fromX      the starting point on the x-axis where the grouping should begin
-     * @param groupSpace the space between groups of bars in values (not pixels) e.g. 0.8f for bar width 1f
-     * @param barSpace   the space between individual bars in values (not pixels) e.g. 0.1f for bar width 1f
-     */
-    public void groupBars(float fromX, float groupSpace, float barSpace) {
-
-        if (getBarData() == null) {
-            throw new RuntimeException("You need to set data for the chart before grouping bars.");
-        } else {
-            getBarData().groupBars(fromX, groupSpace, barSpace);
-            notifyDataSetChanged();
-        }
     }
 }

@@ -289,5 +289,7 @@ public abstract class AxisRenderer extends Renderer {
      *
      * @param c
      */
-    public abstract void renderLimitLines(Canvas c);
+    public void renderLimitLines(Canvas c) {
+
+    }
 }

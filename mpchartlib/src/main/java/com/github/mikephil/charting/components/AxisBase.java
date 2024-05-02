@@ -3,14 +3,10 @@ package com.github.mikephil.charting.components;
 
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
-import android.util.Log;
 
 import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Base-class of all axes (previously called labels).
@@ -102,10 +98,10 @@ public abstract class AxisBase extends ComponentBase {
      */
     private DashPathEffect mGridDashPathEffect = null;
 
-    /**
-     * array of limit lines that can be set for the axis
-     */
-    protected List<LimitLine> mLimitLines;
+//    /**
+//     * array of limit lines that can be set for the axis
+//     */
+//    protected List<LimitLine> mLimitLines;
 
     /**
      * flag indicating the limit lines layer depth
@@ -192,7 +188,7 @@ public abstract class AxisBase extends ComponentBase {
         this.mTextSize = Utils.convertDpToPixel(10f);
         this.mXOffset = Utils.convertDpToPixel(5f);
         this.mYOffset = Utils.convertDpToPixel(5f);
-        this.mLimitLines = new ArrayList<LimitLine>();
+        //this.mLimitLines = new ArrayList<LimitLine>();
     }
 
     /**
@@ -429,46 +425,6 @@ public abstract class AxisBase extends ComponentBase {
     }
 
     /**
-     * Adds a new LimitLine to this axis.
-     *
-     * @param l
-     */
-    public void addLimitLine(LimitLine l) {
-        mLimitLines.add(l);
-
-        if (mLimitLines.size() > 6) {
-            Log.e("MPAndroiChart",
-                    "Warning! You have more than 6 LimitLines on your axis, do you really want " +
-                            "that?");
-        }
-    }
-
-    /**
-     * Removes the specified LimitLine from the axis.
-     *
-     * @param l
-     */
-    public void removeLimitLine(LimitLine l) {
-        mLimitLines.remove(l);
-    }
-
-    /**
-     * Removes all LimitLines from the axis.
-     */
-    public void removeAllLimitLines() {
-        mLimitLines.clear();
-    }
-
-    /**
-     * Returns the LimitLines of this axis.
-     *
-     * @return
-     */
-    public List<LimitLine> getLimitLines() {
-        return mLimitLines;
-    }
-
-    /**
      * If this is set to true, the LimitLines are drawn behind the actual data,
      * otherwise on top. Default: false
      *
@@ -523,23 +479,6 @@ public abstract class AxisBase extends ComponentBase {
     }
 
     /**
-     * Sets the formatter to be used for formatting the axis labels. If no formatter is set, the
-     * chart will
-     * automatically determine a reasonable formatting (concerning decimals) for all the values
-     * that are drawn inside
-     * the chart. Use chart.getDefaultValueFormatter() to use the formatter calculated by the chart.
-     *
-     * @param f
-     */
-    public void setValueFormatter(IAxisValueFormatter f) {
-
-        if (f == null)
-            mAxisValueFormatter = new DefaultAxisValueFormatter(mDecimals);
-        else
-            mAxisValueFormatter = f;
-    }
-
-    /**
      * Returns the formatter used for formatting the axis labels.
      *
      * @return
@@ -552,48 +491,6 @@ public abstract class AxisBase extends ComponentBase {
             mAxisValueFormatter = new DefaultAxisValueFormatter(mDecimals);
 
         return mAxisValueFormatter;
-    }
-
-    /**
-     * Enables the grid line to be drawn in dashed mode, e.g. like this
-     * "- - - - - -". THIS ONLY WORKS IF HARDWARE-ACCELERATION IS TURNED OFF.
-     * Keep in mind that hardware acceleration boosts performance.
-     *
-     * @param lineLength  the length of the line pieces
-     * @param spaceLength the length of space in between the pieces
-     * @param phase       offset, in degrees (normally, use 0)
-     */
-    public void enableGridDashedLine(float lineLength, float spaceLength, float phase) {
-        mGridDashPathEffect = new DashPathEffect(new float[]{
-                lineLength, spaceLength
-        }, phase);
-    }
-
-    /**
-     * Enables the grid line to be drawn in dashed mode, e.g. like this
-     * "- - - - - -". THIS ONLY WORKS IF HARDWARE-ACCELERATION IS TURNED OFF.
-     * Keep in mind that hardware acceleration boosts performance.
-     *
-     * @param effect the DashPathEffect
-     */
-    public void setGridDashedLine(DashPathEffect effect) {
-        mGridDashPathEffect = effect;
-    }
-
-    /**
-     * Disables the grid line to be drawn in dashed mode.
-     */
-    public void disableGridDashedLine() {
-        mGridDashPathEffect = null;
-    }
-
-    /**
-     * Returns true if the grid dashed-line effect is enabled, false if not.
-     *
-     * @return
-     */
-    public boolean isGridDashedLineEnabled() {
-        return mGridDashPathEffect == null ? false : true;
     }
 
     /**
