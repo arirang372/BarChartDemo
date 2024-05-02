@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by philipp on 21/10/15.
  */
-public interface IBarDataSet extends IBarLineScatterCandleBubbleDataSet<BarEntry> {
+public interface IBarDataSet extends IDataSet<BarEntry> {
 
     List<Fill> getFills();
 
@@ -51,15 +51,6 @@ public interface IBarDataSet extends IBarLineScatterCandleBubbleDataSet<BarEntry
      * @return
      */
     int getBarBorderColor();
-
-    /**
-     * Returns the alpha value (transparency) that is used for drawing the
-     * highlight indicator.
-     *
-     * @return
-     */
-    int getHighLightAlpha();
-
 
     /**
      * Returns the labels used for the different value-stacks in the legend.

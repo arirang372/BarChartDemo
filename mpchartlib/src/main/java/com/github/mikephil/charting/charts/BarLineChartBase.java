@@ -17,7 +17,7 @@ import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.interfaces.dataprovider.BarLineScatterCandleBubbleDataProvider;
-import com.github.mikephil.charting.interfaces.datasets.IBarLineScatterCandleBubbleDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.renderer.XAxisRenderer;
 import com.github.mikephil.charting.renderer.YAxisRenderer;
 import com.github.mikephil.charting.utils.MPPointD;
@@ -31,7 +31,7 @@ import com.github.mikephil.charting.utils.Utils;
  */
 @SuppressLint("RtlHardcoded")
 public abstract class BarLineChartBase<T extends ChartData<? extends
-        IBarLineScatterCandleBubbleDataSet<? extends Entry>>>
+        IDataSet<? extends Entry>>>
         extends Chart<T> implements BarLineScatterCandleBubbleDataProvider {
 
     /**
@@ -570,27 +570,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
      * When enabled, the values will be clipped to contentRect,
      * otherwise they can bleed outside the content rect.
      *
-     * @param enabled
-     */
-    public void setClipValuesToContent(boolean enabled) {
-        mClipValuesToContent = enabled;
-    }
-
-    /**
-     * When disabled, the data and/or highlights will not be clipped to contentRect. Disabling this option can
-     * be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
-     * that there is unwanted clipping.
-     *
-     * @param enabled
-     */
-    public void setClipDataToContent(boolean enabled) {
-        mClipDataToContent = enabled;
-    }
-
-    /**
-     * When enabled, the values will be clipped to contentRect,
-     * otherwise they can bleed outside the content rect.
-     *
      * @return
      */
     public boolean isClipValuesToContentEnabled() {
@@ -732,19 +711,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
     @Override
     public float getYChartMin() {
         return Math.min(mAxisLeft.mAxisMinimum, mAxisRight.mAxisMinimum);
-    }
-
-    /**
-     * Returns true if either the left or the right or both axes are inverted.
-     *
-     * @return
-     */
-    public boolean isAnyAxisInverted() {
-        if (mAxisLeft.isInverted())
-            return true;
-        if (mAxisRight.isInverted())
-            return true;
-        return false;
     }
 
     @Override

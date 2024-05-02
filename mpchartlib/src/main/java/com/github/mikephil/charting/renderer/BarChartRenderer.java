@@ -10,8 +10,6 @@ import android.graphics.drawable.Drawable;
 import com.github.mikephil.charting.buffer.BarBuffer;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarEntry;
-//import com.github.mikephil.charting.highlight.Highlight;
-//import com.github.mikephil.charting.highlight.Range;
 import com.github.mikephil.charting.interfaces.dataprovider.BarDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.Fill;
@@ -22,7 +20,7 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.List;
 
-public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
+public class BarChartRenderer extends DataRenderer {
 
     protected BarDataProvider mChart;
 
@@ -212,8 +210,8 @@ public class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
 
                 IBarDataSet dataSet = dataSets.get(i);
 
-                if (!shouldDrawValues(dataSet))
-                    continue;
+//                if (!shouldDrawValues(dataSet))
+//                    continue;
 
                 // apply the text-styling defined by the DataSet
                 applyValueTextStyle(dataSet);

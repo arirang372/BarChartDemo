@@ -12,11 +12,6 @@ import java.util.List;
 public class BarDataSet extends DataSet<BarEntry> implements IBarDataSet {
     protected int mHighLightColor = Color.rgb(255, 187, 115);
 
-    @Override
-    public int getHighLightColor() {
-        return mHighLightColor;
-    }
-
     /**
      * the maximum number of bars that are stacked upon each other, this value
      * is calculated from the Entries that are added to the DataSet
@@ -37,10 +32,6 @@ public class BarDataSet extends DataSet<BarEntry> implements IBarDataSet {
      */
     private int mHighLightAlpha = 120;
 
-    /**
-     * the overall entry count, including counting each stack-value individually
-     */
-    private int mEntryCountStacks = 0;
 
     /**
      * array of labels used to describe the different values of the stacked bars
@@ -55,7 +46,6 @@ public class BarDataSet extends DataSet<BarEntry> implements IBarDataSet {
         mHighLightColor = Color.rgb(0, 0, 0);
 
         calcStackSize(yVals);
-        calcEntryCountIncludingStacks(yVals);
     }
 
     @Override
@@ -109,17 +99,6 @@ public class BarDataSet extends DataSet<BarEntry> implements IBarDataSet {
     }
 
     /**
-     * Sets the start and end color for gradient color, ONLY color that should be used for this DataSet.
-     *
-     * @param startColor
-     * @param endColor
-     */
-    public void setGradientColor(int startColor, int endColor) {
-        mFills.clear();
-        mFills.add(new Fill(startColor, endColor));
-    }
-
-    /**
      * This method is deprecated.
      * Use setFills(...) instead.
      *
@@ -137,25 +116,6 @@ public class BarDataSet extends DataSet<BarEntry> implements IBarDataSet {
      */
     public void setFills(List<Fill> fills) {
         this.mFills = fills;
-    }
-
-    /**
-     * Calculates the total number of entries this DataSet represents, including
-     * stacks. All values belonging to a stack are calculated separately.
-     */
-    private void calcEntryCountIncludingStacks(List<BarEntry> yVals) {
-
-        mEntryCountStacks = 0;
-
-        for (int i = 0; i < yVals.size(); i++) {
-
-            float[] vals = yVals.get(i).getYVals();
-
-            if (vals == null)
-                mEntryCountStacks++;
-            else
-                mEntryCountStacks += vals.length;
-        }
     }
 
     /**
@@ -208,40 +168,10 @@ public class BarDataSet extends DataSet<BarEntry> implements IBarDataSet {
         return mStackSize > 1 ? true : false;
     }
 
-    /**
-     * returns the overall entry count, including counting each stack-value
-     * individually
-     *
-     * @return
-     */
-    public int getEntryCountStacks() {
-        return mEntryCountStacks;
-    }
-
-    /**
-     * Sets the color used for drawing the bar-shadows. The bar shadows is a
-     * surface behind the bar that indicates the maximum value. Don't for get to
-     * use getResources().getColor(...) to set this. Or Color.rgb(...).
-     *
-     * @param color
-     */
-    public void setBarShadowColor(int color) {
-        mBarShadowColor = color;
-    }
 
     @Override
     public int getBarShadowColor() {
         return mBarShadowColor;
-    }
-
-    /**
-     * Sets the width used for drawing borders around the bars.
-     * If borderWidth == 0, no border will be drawn.
-     *
-     * @return
-     */
-    public void setBarBorderWidth(float width) {
-        mBarBorderWidth = width;
     }
 
     /**
@@ -256,15 +186,6 @@ public class BarDataSet extends DataSet<BarEntry> implements IBarDataSet {
     }
 
     /**
-     * Sets the color drawing borders around the bars.
-     *
-     * @return
-     */
-    public void setBarBorderColor(int color) {
-        mBarBorderColor = color;
-    }
-
-    /**
      * Returns the color drawing borders around the bars.
      *
      * @return
@@ -274,20 +195,6 @@ public class BarDataSet extends DataSet<BarEntry> implements IBarDataSet {
         return mBarBorderColor;
     }
 
-    /**
-     * Set the alpha value (transparency) that is used for drawing the highlight
-     * indicator bar. min = 0 (fully transparent), max = 255 (fully opaque)
-     *
-     * @param alpha
-     */
-    public void setHighLightAlpha(int alpha) {
-        mHighLightAlpha = alpha;
-    }
-
-    @Override
-    public int getHighLightAlpha() {
-        return mHighLightAlpha;
-    }
 
     /**
      * Sets labels for different values of bar-stacks, in case there are one.
