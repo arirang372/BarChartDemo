@@ -231,47 +231,11 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
         return mXMax;
     }
 
-    @Override
-    public void addEntryOrdered(T e) {
-
-        if (e == null)
-            return;
-
-        if (mEntries == null) {
-            mEntries = new ArrayList<T>();
-        }
-
-        calcMinMax(e);
-
-        if (mEntries.size() > 0 && mEntries.get(mEntries.size() - 1).getX() > e.getX()) {
-            int closestIndex = getEntryIndex(e.getX(), e.getY(), Rounding.UP);
-            mEntries.add(closestIndex, e);
-        } else {
-            mEntries.add(e);
-        }
-    }
 
     @Override
     public void clear() {
         mEntries.clear();
         notifyDataSetChanged();
-    }
-
-    @Override
-    public boolean addEntry(T e) {
-
-        if (e == null)
-            return false;
-
-        List<T> values = getEntries();
-        if (values == null) {
-            values = new ArrayList<>();
-        }
-
-        calcMinMax(e);
-
-        // add the entry
-        return values.add(e);
     }
 
     @Override
@@ -293,10 +257,6 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
         return removed;
     }
 
-    @Override
-    public int getEntryIndex(Entry e) {
-        return mEntries.indexOf(e);
-    }
 
     @Override
     public T getEntryForXValue(float xValue, float closestToY, Rounding rounding) {
@@ -400,47 +360,6 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
         }
 
         return closest;
-    }
-
-    @Override
-    public List<T> getEntriesForXValue(float xValue) {
-
-        List<T> entries = new ArrayList<T>();
-
-        int low = 0;
-        int high = mEntries.size() - 1;
-
-        while (low <= high) {
-            int m = (high + low) / 2;
-            T entry = mEntries.get(m);
-
-            // if we have a match
-            if (xValue == entry.getX()) {
-                while (m > 0 && mEntries.get(m - 1).getX() == xValue)
-                    m--;
-
-                high = mEntries.size();
-
-                // loop over all "equal" entries
-                for (; m < high; m++) {
-                    entry = mEntries.get(m);
-                    if (entry.getX() == xValue) {
-                        entries.add(entry);
-                    } else {
-                        break;
-                    }
-                }
-
-                break;
-            } else {
-                if (xValue > entry.getX())
-                    low = m + 1;
-                else
-                    high = m - 1;
-            }
-        }
-
-        return entries;
     }
 
     /**

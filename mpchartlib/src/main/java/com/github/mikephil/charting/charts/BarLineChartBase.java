@@ -16,7 +16,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.interfaces.dataprovider.BarLineScatterCandleBubbleDataProvider;
+import com.github.mikephil.charting.interfaces.dataprovider.BarDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.renderer.XAxisRenderer;
 import com.github.mikephil.charting.renderer.YAxisRenderer;
@@ -32,7 +32,7 @@ import com.github.mikephil.charting.utils.Utils;
 @SuppressLint("RtlHardcoded")
 public abstract class BarLineChartBase<T extends ChartData<? extends
         IDataSet<? extends Entry>>>
-        extends Chart<T> implements BarLineScatterCandleBubbleDataProvider {
+        extends Chart<T> implements BarDataProvider {
 
     /**
      * the maximum number of entries to which values will be drawn
@@ -702,16 +702,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
     public void setPinchZoom(boolean enabled) {
         mPinchZoomEnabled = enabled;
     }
-
-//    @Override
-//    public float getYChartMax() {
-//        return Math.max(mAxisLeft.mAxisMaximum, mAxisRight.mAxisMaximum);
-//    }
-//
-//    @Override
-//    public float getYChartMin() {
-//        return Math.min(mAxisLeft.mAxisMinimum, mAxisRight.mAxisMinimum);
-//    }
 
     @Override
     public void setPaint(Paint p, int which) {

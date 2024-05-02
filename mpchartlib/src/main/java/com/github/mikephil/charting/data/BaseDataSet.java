@@ -264,16 +264,6 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
     }
 
     @Override
-    public void setHighlightEnabled(boolean enabled) {
-        mHighlightEnabled = enabled;
-    }
-
-    @Override
-    public boolean isHighlightEnabled() {
-        return mHighlightEnabled;
-    }
-
-    @Override
     public void setValueFormatter(IValueFormatter f) {
 
         if (f == null)
@@ -294,21 +284,6 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
         return mValueFormatter == null;
     }
 
-    @Override
-    public void setValueTextColor(int color) {
-        mValueColors.clear();
-        mValueColors.add(color);
-    }
-
-    @Override
-    public void setValueTextColors(List<Integer> colors) {
-        mValueColors = colors;
-    }
-
-    @Override
-    public void setValueTypeface(Typeface tf) {
-        mValueTypeface = tf;
-    }
 
     @Override
     public void setValueTextSize(float size) {
@@ -372,11 +347,6 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
     }
 
     @Override
-    public void setDrawValues(boolean enabled) {
-        this.mDrawValues = enabled;
-    }
-
-    @Override
     public boolean isDrawValuesEnabled() {
         return mDrawValues;
     }
@@ -392,20 +362,8 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
     }
 
     @Override
-    public void setIconsOffset(MPPointF offsetDp) {
-
-        mIconsOffset.x = offsetDp.x;
-        mIconsOffset.y = offsetDp.y;
-    }
-
-    @Override
     public MPPointF getIconsOffset() {
         return mIconsOffset;
-    }
-
-    @Override
-    public void setVisible(boolean visible) {
-        mVisible = visible;
     }
 
     @Override
@@ -423,57 +381,6 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
         mAxisDependency = dependency;
     }
 
-
-    /**
-     * ###### ###### DATA RELATED METHODS ###### ######
-     */
-
-    @Override
-    public int getIndexInEntries(int xIndex) {
-
-        for (int i = 0; i < getEntryCount(); i++) {
-            if (xIndex == getEntryForIndex(i).getX())
-                return i;
-        }
-
-        return -1;
-    }
-
-    @Override
-    public boolean removeFirst() {
-
-        if (getEntryCount() > 0) {
-
-            T entry = getEntryForIndex(0);
-            return removeEntry(entry);
-        } else
-            return false;
-    }
-
-    @Override
-    public boolean removeLast() {
-
-        if (getEntryCount() > 0) {
-
-            T e = getEntryForIndex(getEntryCount() - 1);
-            return removeEntry(e);
-        } else
-            return false;
-    }
-
-    @Override
-    public boolean removeEntryByXValue(float xValue) {
-
-        T e = getEntryForXValue(xValue, Float.NaN);
-        return removeEntry(e);
-    }
-
-    @Override
-    public boolean removeEntry(int index) {
-
-        T e = getEntryForIndex(index);
-        return removeEntry(e);
-    }
 
     @Override
     public boolean contains(T e) {

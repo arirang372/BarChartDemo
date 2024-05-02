@@ -104,17 +104,6 @@ public interface IDataSet<T extends Entry> {
     T getEntryForXValue(float xValue, float closestToY);
 
     /**
-     * Returns all Entry objects found at the given x-value with binary
-     * search. An empty array if no Entry object at that x-value.
-     * INFORMATION: This method does calculations at runtime. Do
-     * not over-use in performance critical situations.
-     *
-     * @param xValue
-     * @return
-     */
-    List<T> getEntriesForXValue(float xValue);
-
-    /**
      * Returns the Entry object found at the given index (NOT xIndex) in the values array.
      *
      * @param index
@@ -138,63 +127,6 @@ public interface IDataSet<T extends Entry> {
      */
     int getEntryIndex(float xValue, float closestToY, DataSet.Rounding rounding);
 
-    /**
-     * Returns the position of the provided entry in the DataSets Entry array.
-     * Returns -1 if doesn't exist.
-     *
-     * @param e
-     * @return
-     */
-    int getEntryIndex(T e);
-
-
-    /**
-     * This method returns the actual
-     * index in the Entry array of the DataSet for a given xIndex. IMPORTANT: This method does
-     * calculations at runtime, do not over-use in performance critical
-     * situations.
-     *
-     * @param xIndex
-     * @return
-     */
-    int getIndexInEntries(int xIndex);
-
-    /**
-     * Adds an Entry to the DataSet dynamically.
-     * Entries are added to the end of the list.
-     * This will also recalculate the current minimum and maximum
-     * values of the DataSet and the value-sum.
-     *
-     * @param e
-     */
-    boolean addEntry(T e);
-
-
-    /**
-     * Adds an Entry to the DataSet dynamically.
-     * Entries are added to their appropriate index in the values array respective to their x-position.
-     * This will also recalculate the current minimum and maximum
-     * values of the DataSet and the value-sum.
-     *
-     * @param e
-     */
-    void addEntryOrdered(T e);
-
-    /**
-     * Removes the first Entry (at index 0) of this DataSet from the entries array.
-     * Returns true if successful, false if not.
-     *
-     * @return
-     */
-    boolean removeFirst();
-
-    /**
-     * Removes the last Entry (at index size-1) of this DataSet from the entries array.
-     * Returns true if successful, false if not.
-     *
-     * @return
-     */
-    boolean removeLast();
 
     /**
      * Removes an Entry from the DataSets entries array. This will also
@@ -206,22 +138,6 @@ public interface IDataSet<T extends Entry> {
      */
     boolean removeEntry(T e);
 
-    /**
-     * Removes the Entry object closest to the given x-value from the DataSet.
-     * Returns true if an Entry was removed, false if no Entry could be removed.
-     *
-     * @param xValue
-     */
-    boolean removeEntryByXValue(float xValue);
-
-    /**
-     * Removes the Entry object at the given index in the values array from the DataSet.
-     * Returns true if an Entry was removed, false if no Entry could be removed.
-     *
-     * @param index
-     * @return
-     */
-    boolean removeEntry(int index);
 
     /**
      * Checks if this DataSet contains the specified Entry. Returns true if so,
@@ -294,20 +210,6 @@ public interface IDataSet<T extends Entry> {
      */
     int getColor(int index);
 
-    /**
-     * returns true if highlighting of values is enabled, false if not
-     *
-     * @return
-     */
-    boolean isHighlightEnabled();
-
-    /**
-     * If set to true, value highlighting is enabled which means that values can
-     * be highlighted programmatically or by touch gesture.
-     *
-     * @param enabled
-     */
-    void setHighlightEnabled(boolean enabled);
 
     /**
      * Sets the formatter to be used for drawing the values inside the chart. If
@@ -333,27 +235,6 @@ public interface IDataSet<T extends Entry> {
      * @return
      */
     boolean needsFormatter();
-
-    /**
-     * Sets the color the value-labels of this DataSet should have.
-     *
-     * @param color
-     */
-    void setValueTextColor(int color);
-
-    /**
-     * Sets a list of colors to be used as the colors for the drawn values.
-     *
-     * @param colors
-     */
-    void setValueTextColors(List<Integer> colors);
-
-    /**
-     * Sets a Typeface for the value-labels of this DataSet.
-     *
-     * @param tf
-     */
-    void setValueTypeface(Typeface tf);
 
     /**
      * Sets the text-size of the value-labels of this DataSet in dp.
@@ -421,15 +302,6 @@ public interface IDataSet<T extends Entry> {
     DashPathEffect getFormLineDashEffect();
 
     /**
-     * set this to true to draw y-values on the chart.
-     *
-     * NOTE (for bar and line charts): if `maxVisibleCount` is reached, no values will be drawn even
-     * if this is enabled
-     * @param enabled
-     */
-    void setDrawValues(boolean enabled);
-
-    /**
      * Returns true if y-value drawing is enabled, false if not
      *
      * @return
@@ -453,28 +325,12 @@ public interface IDataSet<T extends Entry> {
      */
     boolean isDrawIconsEnabled();
 
-    /**
-     * Offset of icons drawn on the chart.
-     *
-     * For all charts except Pie and Radar it will be ordinary (x offset,y offset).
-     *
-     * For Pie and Radar chart it will be (y offset, distance from center offset); so if you want icon to be rendered under value, you should increase X component of CGPoint, and if you want icon to be rendered closet to center, you should decrease height component of CGPoint.
-     * @param offset
-     */
-    void setIconsOffset(MPPointF offset);
 
     /**
      * Get the offset for drawing icons.
      */
     MPPointF getIconsOffset();
 
-    /**
-     * Set the visibility of this DataSet. If not visible, the DataSet will not
-     * be drawn to the chart upon refreshing it.
-     *
-     * @param visible
-     */
-    void setVisible(boolean visible);
 
     /**
      * Returns true if this DataSet is visible inside the chart, or false if it
