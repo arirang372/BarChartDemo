@@ -24,13 +24,8 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.DefaultValueFormatter;
-import com.github.mikephil.charting.formatter.IValueFormatter;
-//import com.github.mikephil.charting.highlight.ChartHighlighter;
-//import com.github.mikephil.charting.highlight.Highlight;
-//import com.github.mikephil.charting.highlight.IHighlighter;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.renderer.DataRenderer;
-import com.github.mikephil.charting.renderer.LegendRenderer;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Utils;
 import com.github.mikephil.charting.utils.ViewPortHandler;
@@ -100,25 +95,14 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
     protected Legend mLegend;
 
     /**
-     * listener that is called when a value on the chart is selected
-     */
-//    protected OnChartValueSelectedListener mSelectionListener;
-
-    // protected ChartTouchListener mChartTouchListener;
-
-    /**
      * text that is displayed when the chart is empty
      */
     private String mNoDataText = "No chart data available.";
-
-    protected LegendRenderer mLegendRenderer;
 
     /**
      * object responsible for rendering the data
      */
     protected DataRenderer mRenderer;
-
-  //  protected IHighlighter mHighlighter;
 
     /**
      * object that manages the bounds and drawing constraints of the chart
@@ -170,8 +154,6 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
 
         mDescription = new Description();
         mLegend = new Legend();
-
-        mLegendRenderer = new LegendRenderer(mViewPortHandler, mLegend);
 
         mXAxis = new XAxis();
 
@@ -341,39 +323,12 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
         }
     }
 
-    /**
-     * ################ ################ ################ ################
-     */
-    /** BELOW THIS CODE FOR HIGHLIGHTING */
-
-    /**
-     * array of Highlight objects that reference the highlighted slices in the
-     * chart
-     */
-   // protected Highlight[] mIndicesToHighlight;
 
     /**
      * The maximum distance in dp away from an entry causing it to highlight.
      */
     protected float mMaxHighlightDistance = 0f;
 
-//    @Override
-//    public float getMaxHighlightDistance() {
-//        return mMaxHighlightDistance;
-//    }
-
-    /**
-     * Returns true if there are values to highlight, false if there are no
-     * values to highlight. Checks if the highlight array is null, has a length
-     * of zero or if the first object is null.
-     *
-     * @return
-     */
-//    public boolean valuesToHighlight() {
-//        return mIndicesToHighlight == null || mIndicesToHighlight.length <= 0
-//                || mIndicesToHighlight[0] == null ? false
-//                : true;
-//    }
 
     /**
      * ################ ################ ################ ################
@@ -402,30 +357,6 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
         return mXAxis;
     }
 
-    /**
-     * Returns the default IValueFormatter that has been determined by the chart
-     * considering the provided minimum and maximum values.
-     *
-     * @return
-     */
-    public IValueFormatter getDefaultValueFormatter() {
-        return mDefaultValueFormatter;
-    }
-
-//    @Override
-//    public float getXChartMax() {
-//        return mXAxis.mAxisMaximum;
-//    }
-//
-//    @Override
-//    public float getXChartMin() {
-//        return mXAxis.mAxisMinimum;
-//    }
-//
-//    @Override
-//    public float getXRange() {
-//        return mXAxis.mAxisRange;
-//    }
 
     /**
      * Returns a recyclable MPPointF instance.
@@ -436,18 +367,6 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
     public MPPointF getCenter() {
         return MPPointF.getInstance(getWidth() / 2f, getHeight() / 2f);
     }
-
-    /**
-     * Returns a recyclable MPPointF instance.
-     * Returns the center of the chart taking offsets under consideration.
-     * (returns the center of the content rectangle)
-     *
-     * @return
-     */
-//    @Override
-//    public MPPointF getCenterOffsets() {
-//        return mViewPortHandler.getContentCenter();
-//    }
 
     /**
      * Sets extra offsets (around the chart view) to be appended to the
@@ -532,42 +451,6 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
     }
 
 
-//    /**
-//     * sets the marker that is displayed when a value is clicked on the chart
-//     *
-//     * @param marker
-//     */
-//    public void setMarker(IMarker marker) {
-//        mMarker = marker;
-//    }
-//
-//    /**
-//     * returns the marker that is set as a marker view for the chart
-//     *
-//     * @return
-//     */
-//    public IMarker getMarker() {
-//        return mMarker;
-//    }
-//
-//    @Deprecated
-//    public void setMarkerView(IMarker v) {
-//        setMarker(v);
-//    }
-//
-//    @Deprecated
-//    public IMarker getMarkerView() {
-//        return getMarker();
-//    }
-
-    /**
-     * Sets a new Description object for the chart.
-     *
-     * @param desc
-     */
-    public void setDescription(Description desc) {
-        this.mDescription = desc;
-    }
 
     /**
      * Returns the Description object of the chart that is responsible for holding all information related
@@ -589,27 +472,6 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
     public Legend getLegend() {
         return mLegend;
     }
-
-    /**
-     * Returns the renderer object responsible for rendering / drawing the
-     * Legend.
-     *
-     * @return
-     */
-    public LegendRenderer getLegendRenderer() {
-        return mLegendRenderer;
-    }
-
-//    /**
-//     * Returns the rectangle that defines the borders of the chart-value surface
-//     * (into which the actual values are drawn).
-//     *
-//     * @return
-//     */
-//    @Override
-//    public RectF getContentRect() {
-//        return mViewPortHandler.getContentRect();
-//    }
 
     /**
      * paint for the grid background (only line and barchart)
@@ -713,50 +575,6 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
     public ViewPortHandler getViewPortHandler() {
         return mViewPortHandler;
     }
-
-    /**
-     * Returns the Renderer object the chart uses for drawing data.
-     *
-     * @return
-     */
-    public DataRenderer getRenderer() {
-        return mRenderer;
-    }
-
-    /**
-     * Sets a new DataRenderer object for the chart.
-     *
-     * @param renderer
-     */
-    public void setRenderer(DataRenderer renderer) {
-
-        if (renderer != null)
-            mRenderer = renderer;
-    }
-
-//    public IHighlighter getHighlighter() {
-//        return mHighlighter;
-//    }
-//
-//    /**
-//     * Sets a custom highligher object for the chart that handles / processes
-//     * all highlight touch events performed on the chart-view.
-//     *
-//     * @param highlighter
-//     */
-//    public void setHighlighter(ChartHighlighter highlighter) {
-//        mHighlighter = highlighter;
-//    }
-
-    /**
-     * Returns a recyclable MPPointF instance.
-     *
-     * @return
-     */
-//    @Override
-//    public MPPointF getCenterOfView() {
-//        return getCenter();
-//    }
 
     /**
      * Returns the bitmap that represents the chart.

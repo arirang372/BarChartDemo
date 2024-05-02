@@ -235,7 +235,7 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
             mRenderer.drawValues(canvas);
         }
 
-        mLegendRenderer.renderLegend(canvas);
+        // mLegendRenderer.renderLegend(canvas);
 
         drawDescription(canvas);
 
@@ -299,9 +299,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
         mAxisRendererLeft.computeAxis(mAxisLeft.mAxisMinimum, mAxisLeft.mAxisMaximum, mAxisLeft.isInverted());
         mAxisRendererRight.computeAxis(mAxisRight.mAxisMinimum, mAxisRight.mAxisMaximum, mAxisRight.isInverted());
         mXAxisRenderer.computeAxis(mXAxis.mAxisMinimum, mXAxis.mAxisMaximum, false);
-
-        if (mLegend != null)
-            mLegendRenderer.computeLegend(mData);
 
         calculateOffsets();
     }
@@ -643,35 +640,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
             return 1f;
         else
             return mViewPortHandler.getScaleY();
-    }
-
-    /**
-     * if the chart is fully zoomed out, return true
-     *
-     * @return
-     */
-    public boolean isFullyZoomedOut() {
-        return mViewPortHandler.isFullyZoomedOut();
-    }
-
-    /**
-     * Returns the left y-axis object. In the horizontal bar-chart, this is the
-     * top axis.
-     *
-     * @return
-     */
-    public YAxis getAxisLeft() {
-        return mAxisLeft;
-    }
-
-    /**
-     * Returns the right y-axis object. In the horizontal bar-chart, this is the
-     * bottom axis.
-     *
-     * @return
-     */
-    public YAxis getAxisRight() {
-        return mAxisRight;
     }
 
     /**

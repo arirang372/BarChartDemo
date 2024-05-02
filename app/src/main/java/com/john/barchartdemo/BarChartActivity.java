@@ -31,8 +31,6 @@ public class BarChartActivity extends AppCompatActivity {
         setTitle("BarChartActivity");
 
         chart = findViewById(R.id.chart1);
-        // chart.setOnChartValueSelectedListener(this);
-
         chart.setDrawBarShadow(false);
         chart.setDrawValueAboveBar(true);
 
@@ -58,8 +56,6 @@ public class BarChartActivity extends AppCompatActivity {
         l.setXEntrySpace(4f);
 
         setData();
-
-        // chart.setDrawLegend(false);
     }
 
     private void setData() {
