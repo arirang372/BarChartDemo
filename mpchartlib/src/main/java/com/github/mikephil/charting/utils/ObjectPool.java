@@ -26,16 +26,6 @@ public class ObjectPool<T extends ObjectPool.Poolable> {
     private T modelObject;
     private float replenishPercentage;
 
-
-    /**
-     * Returns the id of the given pool instance.
-     *
-     * @return an integer ID belonging to this pool instance.
-     */
-    public int getPoolId(){
-        return poolId;
-    }
-
     /**
      * Returns an ObjectPool instance, of a given starting capacity, that recycles instances of a given Poolable object.
      *
@@ -185,27 +175,6 @@ public class ObjectPool<T extends ObjectPool.Poolable> {
         }
         this.objects = temp;
     }
-
-    /**
-     * Returns the capacity of this object pool.  Note : The pool will automatically resize
-     * to contain additional objects if the user tries to add more objects than the pool's
-     * capacity allows, but this comes at a performance cost.
-     *
-     * @return The capacity of the pool.
-     */
-    public int getPoolCapacity(){
-        return this.objects.length;
-    }
-
-    /**
-     * Returns the number of objects remaining in the pool, for diagnostic purposes.
-     *
-     * @return The number of objects remaining in the pool.
-     */
-    public int getPoolCount(){
-        return this.objectsPointer + 1;
-    }
-
 
     public static abstract class Poolable{
 

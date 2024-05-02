@@ -82,31 +82,6 @@ public class Transformer {
     }
 
     /**
-     * transform a path with all the given matrices VERY IMPORTANT: keep order
-     * to value-touch-offset
-     *
-     * @param path
-     */
-    public void pathValueToPixel(Path path) {
-
-        path.transform(mMatrixValueToPx);
-        path.transform(mViewPortHandler.getMatrixTouch());
-        path.transform(mMatrixOffset);
-    }
-
-    /**
-     * Transforms multiple paths will all matrices.
-     *
-     * @param paths
-     */
-    public void pathValuesToPixel(List<Path> paths) {
-
-        for (int i = 0; i < paths.size(); i++) {
-            pathValueToPixel(paths.get(i));
-        }
-    }
-
-    /**
      * Transform an array of points with all matrices. VERY IMPORTANT: Keep
      * matrix order "value-touch-offset" when transforming.
      *
@@ -126,19 +101,6 @@ public class Transformer {
      */
     public void rectValueToPixel(RectF r) {
 
-        mMatrixValueToPx.mapRect(r);
-        mViewPortHandler.getMatrixTouch().mapRect(r);
-        mMatrixOffset.mapRect(r);
-    }
-
-    /**
-     * Transform a rectangle with all matrices with potential animation phases.
-     *
-     * @param r
-     */
-    public void rectToPixelPhase(RectF r) {
-
-        // multiply the height of the rect with the phase
         mMatrixValueToPx.mapRect(r);
         mViewPortHandler.getMatrixTouch().mapRect(r);
         mMatrixOffset.mapRect(r);

@@ -9,7 +9,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.provider.MediaStore.Images;
@@ -29,7 +28,6 @@ import com.github.mikephil.charting.formatter.IValueFormatter;
 //import com.github.mikephil.charting.highlight.ChartHighlighter;
 //import com.github.mikephil.charting.highlight.Highlight;
 //import com.github.mikephil.charting.highlight.IHighlighter;
-import com.github.mikephil.charting.interfaces.dataprovider.ChartInterface;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.renderer.DataRenderer;
 import com.github.mikephil.charting.renderer.LegendRenderer;
@@ -49,8 +47,7 @@ import java.util.ArrayList;
  * @author Philipp Jahoda
  */
 public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Entry>>> extends
-        ViewGroup
-        implements ChartInterface {
+        ViewGroup {
 
     public static final String LOG_TAG = "MPAndroidChart";
 
@@ -360,10 +357,10 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      */
     protected float mMaxHighlightDistance = 0f;
 
-    @Override
-    public float getMaxHighlightDistance() {
-        return mMaxHighlightDistance;
-    }
+//    @Override
+//    public float getMaxHighlightDistance() {
+//        return mMaxHighlightDistance;
+//    }
 
     /**
      * Returns true if there are values to highlight, false if there are no
@@ -415,20 +412,20 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
         return mDefaultValueFormatter;
     }
 
-    @Override
-    public float getXChartMax() {
-        return mXAxis.mAxisMaximum;
-    }
-
-    @Override
-    public float getXChartMin() {
-        return mXAxis.mAxisMinimum;
-    }
-
-    @Override
-    public float getXRange() {
-        return mXAxis.mAxisRange;
-    }
+//    @Override
+//    public float getXChartMax() {
+//        return mXAxis.mAxisMaximum;
+//    }
+//
+//    @Override
+//    public float getXChartMin() {
+//        return mXAxis.mAxisMinimum;
+//    }
+//
+//    @Override
+//    public float getXRange() {
+//        return mXAxis.mAxisRange;
+//    }
 
     /**
      * Returns a recyclable MPPointF instance.
@@ -447,10 +444,10 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      *
      * @return
      */
-    @Override
-    public MPPointF getCenterOffsets() {
-        return mViewPortHandler.getContentCenter();
-    }
+//    @Override
+//    public MPPointF getCenterOffsets() {
+//        return mViewPortHandler.getContentCenter();
+//    }
 
     /**
      * Sets extra offsets (around the chart view) to be appended to the
@@ -603,16 +600,16 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
         return mLegendRenderer;
     }
 
-    /**
-     * Returns the rectangle that defines the borders of the chart-value surface
-     * (into which the actual values are drawn).
-     *
-     * @return
-     */
-    @Override
-    public RectF getContentRect() {
-        return mViewPortHandler.getContentRect();
-    }
+//    /**
+//     * Returns the rectangle that defines the borders of the chart-value surface
+//     * (into which the actual values are drawn).
+//     *
+//     * @return
+//     */
+//    @Override
+//    public RectF getContentRect() {
+//        return mViewPortHandler.getContentRect();
+//    }
 
     /**
      * paint for the grid background (only line and barchart)
@@ -756,10 +753,10 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      *
      * @return
      */
-    @Override
-    public MPPointF getCenterOfView() {
-        return getCenter();
-    }
+//    @Override
+//    public MPPointF getCenterOfView() {
+//        return getCenter();
+//    }
 
     /**
      * Returns the bitmap that represents the chart.

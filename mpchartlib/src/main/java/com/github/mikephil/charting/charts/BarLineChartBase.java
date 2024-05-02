@@ -703,15 +703,15 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
         mPinchZoomEnabled = enabled;
     }
 
-    @Override
-    public float getYChartMax() {
-        return Math.max(mAxisLeft.mAxisMaximum, mAxisRight.mAxisMaximum);
-    }
-
-    @Override
-    public float getYChartMin() {
-        return Math.min(mAxisLeft.mAxisMinimum, mAxisRight.mAxisMinimum);
-    }
+//    @Override
+//    public float getYChartMax() {
+//        return Math.max(mAxisLeft.mAxisMaximum, mAxisRight.mAxisMaximum);
+//    }
+//
+//    @Override
+//    public float getYChartMin() {
+//        return Math.min(mAxisLeft.mAxisMinimum, mAxisRight.mAxisMinimum);
+//    }
 
     @Override
     public void setPaint(Paint p, int which) {

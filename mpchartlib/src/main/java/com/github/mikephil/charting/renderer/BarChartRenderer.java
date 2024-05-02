@@ -101,9 +101,9 @@ public class BarChartRenderer extends DataRenderer {
             final float barWidthHalf = barWidth / 2.0f;
             float x;
 
-            for (int i = 0, count = Math.min((int)(Math.ceil((float)(dataSet.getEntryCount()))), dataSet.getEntryCount());
-                i < count;
-                i++) {
+            for (int i = 0, count = Math.min((int) (Math.ceil((float) (dataSet.getEntryCount()))), dataSet.getEntryCount());
+                 i < count;
+                 i++) {
 
                 BarEntry e = dataSet.getEntryForIndex(i);
 
@@ -168,8 +168,7 @@ public class BarChartRenderer extends DataRenderer {
                                 buffer.buffer[j + 2],
                                 buffer.buffer[j + 3],
                                 isInverted ? Fill.Direction.DOWN : Fill.Direction.UP);
-            }
-            else {
+            } else {
                 c.drawRect(buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
                         buffer.buffer[j + 3], mRenderPaint);
             }
@@ -179,18 +178,6 @@ public class BarChartRenderer extends DataRenderer {
                         buffer.buffer[j + 3], mBarBorderPaint);
             }
         }
-    }
-
-    protected void prepareBarHighlight(float x, float y1, float y2, float barWidthHalf, Transformer trans) {
-
-        float left = x - barWidthHalf;
-        float right = x + barWidthHalf;
-        float top = y1;
-        float bottom = y2;
-
-        mBarRect.set(left, top, right, bottom);
-
-        trans.rectToPixelPhase(mBarRect);
     }
 
     @Override
@@ -209,9 +196,6 @@ public class BarChartRenderer extends DataRenderer {
             for (int i = 0; i < mChart.getBarData().getDataSetCount(); i++) {
 
                 IBarDataSet dataSet = dataSets.get(i);
-
-//                if (!shouldDrawValues(dataSet))
-//                    continue;
 
                 // apply the text-styling defined by the DataSet
                 applyValueTextStyle(dataSet);
@@ -276,8 +260,8 @@ public class BarChartRenderer extends DataRenderer {
                             Utils.drawImage(
                                     c,
                                     icon,
-                                    (int)px,
-                                    (int)py,
+                                    (int) px,
+                                    (int) py,
                                     icon.getIntrinsicWidth(),
                                     icon.getIntrinsicHeight());
                         }
@@ -333,8 +317,8 @@ public class BarChartRenderer extends DataRenderer {
                                 Utils.drawImage(
                                         c,
                                         icon,
-                                        (int)px,
-                                        (int)py,
+                                        (int) px,
+                                        (int) py,
                                         icon.getIntrinsicWidth(),
                                         icon.getIntrinsicHeight());
                             }
@@ -402,8 +386,8 @@ public class BarChartRenderer extends DataRenderer {
                                     Utils.drawImage(
                                             c,
                                             icon,
-                                            (int)(x + iconsOffset.x),
-                                            (int)(y + iconsOffset.y),
+                                            (int) (x + iconsOffset.x),
+                                            (int) (y + iconsOffset.y),
                                             icon.getIntrinsicWidth(),
                                             icon.getIntrinsicHeight());
                                 }
@@ -419,69 +403,6 @@ public class BarChartRenderer extends DataRenderer {
             }
         }
     }
-
-//    @Override
-//    public void drawHighlighted(Canvas c, Highlight[] indices) {
-//
-//        BarData barData = mChart.getBarData();
-//
-//        for (Highlight high : indices) {
-//
-//            IBarDataSet set = barData.getDataSetByIndex(high.getDataSetIndex());
-//
-//            if (set == null || !set.isHighlightEnabled())
-//                continue;
-//
-//            BarEntry e = set.getEntryForXValue(high.getX(), high.getY());
-//
-//            if (!isInBoundsX(e, set))
-//                continue;
-//
-//            Transformer trans = mChart.getTransformer(set.getAxisDependency());
-//
-//            mHighlightPaint.setColor(set.getHighLightColor());
-//            mHighlightPaint.setAlpha(set.getHighLightAlpha());
-//
-//            boolean isStack = (high.getStackIndex() >= 0  && e.isStacked()) ? true : false;
-//
-//            final float y1;
-//            final float y2;
-//
-//            if (isStack) {
-//
-//                if(mChart.isHighlightFullBarEnabled()) {
-//
-//                    y1 = e.getPositiveSum();
-//                    y2 = -e.getNegativeSum();
-//
-//                } else {
-//
-//                    Range range = e.getRanges()[high.getStackIndex()];
-//
-//                    y1 = range.from;
-//                    y2 = range.to;
-//                }
-//
-//            } else {
-//                y1 = e.getY();
-//                y2 = 0.f;
-//            }
-//
-//            prepareBarHighlight(e.getX(), y1, y2, barData.getBarWidth() / 2f, trans);
-//
-//            setHighlightDrawPos(high, mBarRect);
-//
-//            c.drawRect(mBarRect, mHighlightPaint);
-//        }
-//    }
-//
-//    /**
-//     * Sets the drawing position of the highlight object based on the riven bar-rect.
-//     * @param high
-//     */
-//    protected void setHighlightDrawPos(Highlight high, RectF bar) {
-//        high.setDraw(bar.centerX(), bar.top);
-//    }
 
     @Override
     public void drawExtras(Canvas c) {

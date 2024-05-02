@@ -116,27 +116,6 @@ public abstract class Utils {
     }
 
     /**
-     * This method converts device specific pixels to density independent
-     * pixels. NEEDS UTILS TO BE INITIALIZED BEFORE USAGE.
-     *
-     * @param px A value in px (pixels) unit. Which we need to convert into db
-     * @return A float value to represent dp equivalent to px value
-     */
-    public static float convertPixelsToDp(float px) {
-
-        if (mMetrics == null) {
-
-            Log.e("MPChartLib-Utils",
-                    "Utils NOT INITIALIZED. You need to call Utils.init(...) at least once before" +
-                            " calling Utils.convertPixelsToDp(...). Otherwise conversion does not" +
-                            " take place.");
-            return px;
-        }
-
-        return px / mMetrics.density;
-    }
-
-    /**
      * calculates the approximate width of a text, depending on a demo text
      * avoid repeated calls (e.g. inside drawing methods)
      *

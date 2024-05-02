@@ -9,8 +9,7 @@ import android.graphics.Paint.Style;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IValueFormatter;
-//import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.dataprovider.ChartInterface;
+import com.github.mikephil.charting.interfaces.dataprovider.BarLineScatterCandleBubbleDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.utils.Utils;
 import com.github.mikephil.charting.utils.ViewPortHandler;
@@ -58,39 +57,11 @@ public abstract class DataRenderer extends Renderer {
         mHighlightPaint.setColor(Color.rgb(255, 187, 115));
     }
 
-    protected boolean isDrawingValuesAllowed(ChartInterface chart) {
+    protected boolean isDrawingValuesAllowed(BarLineScatterCandleBubbleDataProvider chart) {
         return chart.getData().getEntryCount() < chart.getMaxVisibleCount()
                 * mViewPortHandler.getScaleX();
     }
 
-    /**
-     * Returns the Paint object this renderer uses for drawing the values
-     * (value-text).
-     *
-     * @return
-     */
-    public Paint getPaintValues() {
-        return mValuePaint;
-    }
-
-    /**
-     * Returns the Paint object this renderer uses for drawing highlight
-     * indicators.
-     *
-     * @return
-     */
-    public Paint getPaintHighlight() {
-        return mHighlightPaint;
-    }
-
-    /**
-     * Returns the Paint object used for rendering.
-     *
-     * @return
-     */
-    public Paint getPaintRender() {
-        return mRenderPaint;
-    }
 
     /**
      * Applies the required styling (provided by the DataSet) to the value-paint
@@ -149,11 +120,4 @@ public abstract class DataRenderer extends Renderer {
      */
     public abstract void drawExtras(Canvas c);
 
-    /**
-     * Draws all highlight indicators for the values that are currently highlighted.
-     *
-     * @param c
-     * @param indices the highlighted values
-     */
-   // public abstract void drawHighlighted(Canvas c, Highlight[] indices);
 }
