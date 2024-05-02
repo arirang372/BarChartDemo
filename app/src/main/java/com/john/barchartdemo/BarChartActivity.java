@@ -3,6 +3,7 @@ package com.john.barchartdemo;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -17,7 +18,7 @@ import com.github.mikephil.charting.utils.Fill;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BarChartActivity extends DemoBase {
+public class BarChartActivity extends AppCompatActivity {
 
     private BarChart chart;
 
@@ -113,10 +114,5 @@ public class BarChartActivity extends DemoBase {
 
             chart.setData(data);
         }
-    }
-
-    @Override
-    protected void saveToGallery() {
-        saveToGallery(chart, "BarChartActivity");
     }
 }
