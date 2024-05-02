@@ -249,14 +249,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
         }
     }
 
-    /**
-     * RESET PERFORMANCE TRACKING FIELDS
-     */
-    public void resetTracking() {
-        totalTime = 0;
-        drawCycles = 0;
-    }
-
     protected void prepareValuePxMatrix() {
 
         if (mLogEnabled)
@@ -541,26 +533,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
      */
     public void setDrawGridBackground(boolean enabled) {
         mDrawGridBackground = enabled;
-    }
-
-    /**
-     * When enabled, the borders rectangle will be rendered.
-     * If this is enabled, there is no point drawing the axis-lines of x- and y-axis.
-     *
-     * @param enabled
-     */
-    public void setDrawBorders(boolean enabled) {
-        mDrawBorders = enabled;
-    }
-
-    /**
-     * When enabled, the borders rectangle will be rendered.
-     * If this is enabled, there is no point drawing the axis-lines of x- and y-axis.
-     *
-     * @return
-     */
-    public boolean isDrawBordersEnabled() {
-        return mDrawBorders;
     }
 
     /**
