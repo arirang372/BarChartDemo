@@ -2,7 +2,7 @@ package com.github.mikephil.charting.highlight;
 
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.BarLineScatterCandleBubbleData;
+import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.interfaces.dataprovider.BarDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.MPPointD;
@@ -20,7 +20,7 @@ public class BarHighlighter extends ChartHighlighter<BarDataProvider> {
     public Highlight getHighlight(float x, float y) {
         Highlight high = super.getHighlight(x, y);
 
-        if(high == null) {
+        if (high == null) {
             return null;
         }
 
@@ -117,47 +117,13 @@ public class BarHighlighter extends ChartHighlighter<BarDataProvider> {
         return (value > ranges[length].to) ? length : 0;
     }
 
-//    /**
-//     * Splits up the stack-values of the given bar-entry into Range objects.
-//     *
-//     * @param entry
-//     * @return
-//     */
-//    protected Range[] getRanges(BarEntry entry) {
-//
-//        float[] values = entry.getYVals();
-//
-//        if (values == null || values.length == 0)
-//            return new Range[0];
-//
-//        Range[] ranges = new Range[values.length];
-//
-//        float negRemain = -entry.getNegativeSum();
-//        float posRemain = 0f;
-//
-//        for (int i = 0; i < ranges.length; i++) {
-//
-//            float value = values[i];
-//
-//            if (value < 0) {
-//                ranges[i] = new Range(negRemain, negRemain + Math.abs(value));
-//                negRemain += Math.abs(value);
-//            } else {
-//                ranges[i] = new Range(posRemain, posRemain + value);
-//                posRemain += value;
-//            }
-//        }
-//
-//        return ranges;
-//    }
-
     @Override
     protected float getDistance(float x1, float y1, float x2, float y2) {
         return Math.abs(x1 - x2);
     }
 
     @Override
-    protected BarLineScatterCandleBubbleData getData() {
+    protected ChartData<IBarDataSet> getData() {
         return mChart.getBarData();
     }
 }

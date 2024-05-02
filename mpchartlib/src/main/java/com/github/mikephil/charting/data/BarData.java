@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Philipp Jahoda
  */
-public class BarData extends BarLineScatterCandleBubbleData<IBarDataSet> {
+public class BarData extends ChartData<IBarDataSet> {
 
     /**
      * the width of the bars on the x-axis, in values (not pixels)

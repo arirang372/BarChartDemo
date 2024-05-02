@@ -9,7 +9,13 @@ import com.github.mikephil.charting.utils.Fill;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BarDataSet extends BarLineScatterCandleBubbleDataSet<BarEntry> implements IBarDataSet {
+public class BarDataSet extends DataSet<BarEntry> implements IBarDataSet {
+    protected int mHighLightColor = Color.rgb(255, 187, 115);
+
+    @Override
+    public int getHighLightColor() {
+        return mHighLightColor;
+    }
 
     /**
      * the maximum number of bars that are stacked upon each other, this value

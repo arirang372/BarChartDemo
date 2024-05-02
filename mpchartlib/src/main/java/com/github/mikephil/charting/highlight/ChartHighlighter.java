@@ -1,7 +1,7 @@
 package com.github.mikephil.charting.highlight;
 
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarLineScatterCandleBubbleData;
+import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.interfaces.dataprovider.BarLineScatterCandleBubbleDataProvider;
@@ -129,7 +129,7 @@ public class ChartHighlighter<T extends BarLineScatterCandleBubbleDataProvider> 
 
         mHighlightBuffer.clear();
 
-        BarLineScatterCandleBubbleData data = getData();
+        ChartData data = getData();
 
         if (data == null)
             return mHighlightBuffer;
@@ -240,7 +240,7 @@ public class ChartHighlighter<T extends BarLineScatterCandleBubbleDataProvider> 
         return (float) Math.hypot(x1 - x2, y1 - y2);
     }
 
-    protected BarLineScatterCandleBubbleData getData() {
+    protected ChartData getData() {
         return mChart.getData();
     }
 }
