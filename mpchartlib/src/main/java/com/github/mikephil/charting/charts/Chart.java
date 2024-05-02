@@ -66,24 +66,6 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
     protected T mData = null;
 
     /**
-     * Flag that indicates if highlighting per tap (touch) is enabled
-     */
-    protected boolean mHighLightPerTapEnabled = true;
-
-    /**
-     * If set to true, chart continues to scroll after touch up
-     */
-    private boolean mDragDecelerationEnabled = true;
-
-    /**
-     * Deceleration friction coefficient in [0 ; 1] interval, higher values
-     * indicate that speed will decrease slowly, for example if it set to 0, it
-     * will stop immediately. 1 is an invalid value, and will be converted to
-     * 0.999f automatically.
-     */
-    private float mDragDecelerationFrictionCoef = 0.9f;
-
-    /**
      * default value-formatter, number of digits depends on provided chart-data
      */
     protected DefaultValueFormatter mDefaultValueFormatter = new DefaultValueFormatter(0);
