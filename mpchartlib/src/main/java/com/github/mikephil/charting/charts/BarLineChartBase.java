@@ -258,80 +258,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
                 .RIGHT));
     }
 
-    protected void calculateLegendOffsets(RectF offsets) {
-
-        offsets.left = 0.f;
-        offsets.right = 0.f;
-        offsets.top = 0.f;
-        offsets.bottom = 0.f;
-
-        if (mLegend == null || !mLegend.isEnabled() || mLegend.isDrawInsideEnabled())
-            return;
-
-        switch (mLegend.getOrientation()) {
-            case VERTICAL:
-
-                switch (mLegend.getHorizontalAlignment()) {
-                    case LEFT:
-                        offsets.left += Math.min(mLegend.mNeededWidth,
-                                mViewPortHandler.getChartWidth() * mLegend.getMaxSizePercent())
-                                + mLegend.getXOffset();
-                        break;
-
-                    case RIGHT:
-                        offsets.right += Math.min(mLegend.mNeededWidth,
-                                mViewPortHandler.getChartWidth() * mLegend.getMaxSizePercent())
-                                + mLegend.getXOffset();
-                        break;
-
-                    case CENTER:
-
-                        switch (mLegend.getVerticalAlignment()) {
-                            case TOP:
-                                offsets.top += Math.min(mLegend.mNeededHeight,
-                                        mViewPortHandler.getChartHeight() * mLegend.getMaxSizePercent())
-                                        + mLegend.getYOffset();
-                                break;
-
-                            case BOTTOM:
-                                offsets.bottom += Math.min(mLegend.mNeededHeight,
-                                        mViewPortHandler.getChartHeight() * mLegend.getMaxSizePercent())
-                                        + mLegend.getYOffset();
-                                break;
-
-                            default:
-                                break;
-                        }
-                }
-
-                break;
-
-            case HORIZONTAL:
-
-                switch (mLegend.getVerticalAlignment()) {
-                    case TOP:
-                        offsets.top += Math.min(mLegend.mNeededHeight,
-                                mViewPortHandler.getChartHeight() * mLegend.getMaxSizePercent())
-                                + mLegend.getYOffset();
-
-
-                        break;
-
-                    case BOTTOM:
-                        offsets.bottom += Math.min(mLegend.mNeededHeight,
-                                mViewPortHandler.getChartHeight() * mLegend.getMaxSizePercent())
-                                + mLegend.getYOffset();
-
-
-                        break;
-
-                    default:
-                        break;
-                }
-                break;
-        }
-    }
-
     private RectF mOffsetsBuffer = new RectF();
 
     @Override
@@ -341,7 +267,7 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
 
             float offsetLeft = 0f, offsetRight = 0f, offsetTop = 0f, offsetBottom = 0f;
 
-            calculateLegendOffsets(mOffsetsBuffer);
+           // calculateLegendOffsets(mOffsetsBuffer);
 
             offsetLeft += mOffsetsBuffer.left;
             offsetTop += mOffsetsBuffer.top;

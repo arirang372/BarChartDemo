@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
@@ -79,10 +78,10 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      */
     protected Description mDescription;
 
-    /**
-     * the legend object containing all data associated with the legend
-     */
-    protected Legend mLegend;
+//    /**
+//     * the legend object containing all data associated with the legend
+//     */
+//    protected Legend mLegend;
 
     /**
      * text that is displayed when the chart is empty
@@ -143,7 +142,7 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
         mMaxHighlightDistance = Utils.convertDpToPixel(500f);
 
         mDescription = new Description();
-        mLegend = new Legend();
+      //  mLegend = new Legend();
 
         mXAxis = new XAxis();
 
@@ -440,16 +439,16 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
         return mDescription;
     }
 
-    /**
-     * Returns the Legend object of the chart. This method can be used to get an
-     * instance of the legend in order to customize the automatically generated
-     * Legend.
-     *
-     * @return
-     */
-    public Legend getLegend() {
-        return mLegend;
-    }
+//    /**
+//     * Returns the Legend object of the chart. This method can be used to get an
+//     * instance of the legend in order to customize the automatically generated
+//     * Legend.
+//     *
+//     * @return
+//     */
+//    public Legend getLegend() {
+//        return mLegend;
+//    }
 
     /**
      * paint for the grid background (only line and barchart)

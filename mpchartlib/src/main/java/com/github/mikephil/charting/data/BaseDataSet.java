@@ -1,15 +1,12 @@
 package com.github.mikephil.charting.data;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
 
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Utils;
 
@@ -58,7 +55,7 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
      */
     protected Typeface mValueTypeface;
 
-    private Legend.LegendForm mForm = Legend.LegendForm.DEFAULT;
+   // private Legend.LegendForm mForm = Legend.LegendForm.DEFAULT;
     private float mFormSize = Float.NaN;
     private float mFormLineWidth = Float.NaN;
     private DashPathEffect mFormLineDashEffect = null;
@@ -136,29 +133,6 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
     @Override
     public int getColor(int index) {
         return mColors.get(index % mColors.size());
-    }
-
-    /**
-     * Sets the colors that should be used fore this DataSet. Colors are reused
-     * as soon as the number of Entries the DataSet represents is higher than
-     * the size of the colors array. You can use
-     * "new int[] { R.color.red, R.color.green, ... }" to provide colors for
-     * this method. Internally, the colors are resolved using
-     * getResources().getColor(...)
-     *
-     * @param colors
-     */
-    public void setColors(int[] colors, Context c) {
-
-        if (mColors == null) {
-            mColors = new ArrayList<>();
-        }
-
-        mColors.clear();
-
-        for (int color : colors) {
-            mColors.add(c.getResources().getColor(color));
-        }
     }
 
     /**
@@ -284,7 +258,6 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
         baseDataSet.mColors = mColors;
         baseDataSet.mDrawIcons = mDrawIcons;
         baseDataSet.mDrawValues = mDrawValues;
-        baseDataSet.mForm = mForm;
         baseDataSet.mFormLineDashEffect = mFormLineDashEffect;
         baseDataSet.mFormLineWidth = mFormLineWidth;
         baseDataSet.mFormSize = mFormSize;
