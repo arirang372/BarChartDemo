@@ -239,26 +239,6 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
     }
 
     @Override
-    public boolean removeEntry(T e) {
-
-        if (e == null)
-            return false;
-
-        if (mEntries == null)
-            return false;
-
-        // remove the entry
-        boolean removed = mEntries.remove(e);
-
-        if (removed) {
-            calcMinMax();
-        }
-
-        return removed;
-    }
-
-
-    @Override
     public T getEntryForXValue(float xValue, float closestToY, Rounding rounding) {
 
         int index = getEntryIndex(xValue, closestToY, rounding);

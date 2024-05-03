@@ -1,10 +1,7 @@
 package com.github.mikephil.charting.interfaces.datasets;
 
-import android.graphics.DashPathEffect;
-import android.graphics.PointF;
 import android.graphics.Typeface;
 
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
@@ -78,13 +75,11 @@ public interface IDataSet<T extends Entry> {
      * INFORMATION: This method does calculations at runtime. Do
      * not over-use in performance critical situations.
      *
-     * @param xValue the x-value
+     * @param xValue     the x-value
      * @param closestToY If there are multiple y-values for the specified x-value,
-     * @param rounding determine whether to round up/down/closest
-     *                 if there is no Entry matching the provided x-value
+     * @param rounding   determine whether to round up/down/closest
+     *                   if there is no Entry matching the provided x-value
      * @return
-     *
-     *
      */
     T getEntryForXValue(float xValue, float closestToY, DataSet.Rounding rounding);
 
@@ -96,8 +91,7 @@ public interface IDataSet<T extends Entry> {
      * INFORMATION: This method does calculations at runtime. Do
      * not over-use in performance critical situations.
      *
-     *
-     * @param xValue the x-value
+     * @param xValue     the x-value
      * @param closestToY If there are multiple y-values for the specified x-value,
      * @return
      */
@@ -119,25 +113,13 @@ public interface IDataSet<T extends Entry> {
      * INFORMATION: This method does calculations at runtime. Do
      * not over-use in performance critical situations.
      *
-     * @param xValue the x-value
+     * @param xValue     the x-value
      * @param closestToY If there are multiple y-values for the specified x-value,
-     * @param rounding determine whether to round up/down/closest
-     *                 if there is no Entry matching the provided x-value
+     * @param rounding   determine whether to round up/down/closest
+     *                   if there is no Entry matching the provided x-value
      * @return
      */
     int getEntryIndex(float xValue, float closestToY, DataSet.Rounding rounding);
-
-
-    /**
-     * Removes an Entry from the DataSets entries array. This will also
-     * recalculate the current minimum and maximum values of the DataSet and the
-     * value-sum. Returns true if an Entry was removed, false if no Entry could
-     * be removed.
-     *
-     * @param e
-     */
-    boolean removeEntry(T e);
-
 
     /**
      * Checks if this DataSet contains the specified Entry. Returns true if so,
@@ -177,14 +159,6 @@ public interface IDataSet<T extends Entry> {
      * @return
      */
     YAxis.AxisDependency getAxisDependency();
-
-    /**
-     * Set the y-axis this DataSet should be plotted against (either LEFT or
-     * RIGHT). Default: LEFT
-     *
-     * @param dependency
-     */
-    void setAxisDependency(YAxis.AxisDependency dependency);
 
     /**
      * returns all the colors that are set for this DataSet
@@ -244,13 +218,6 @@ public interface IDataSet<T extends Entry> {
     void setValueTextSize(float size);
 
     /**
-     * Returns only the first color of all colors that are set to be used for the values.
-     *
-     * @return
-     */
-    int getValueTextColor();
-
-    /**
      * Returns the color at the specified index that is used for drawing the values inside the chart.
      * Uses modulus internally.
      *
@@ -274,34 +241,6 @@ public interface IDataSet<T extends Entry> {
     float getValueTextSize();
 
     /**
-     * The form to draw for this dataset in the legend.
-     * <p/>
-     * Return `DEFAULT` to use the default legend form.
-     */
-    Legend.LegendForm getForm();
-
-    /**
-     * The form size to draw for this dataset in the legend.
-     * <p/>
-     * Return `Float.NaN` to use the default legend form size.
-     */
-    float getFormSize();
-
-    /**
-     * The line width for drawing the form of this dataset in the legend
-     * <p/>
-     * Return `Float.NaN` to use the default legend form line width.
-     */
-    float getFormLineWidth();
-
-    /**
-     * The line dash path effect used for shapes that consist of lines.
-     * <p/>
-     * Return `null` to use the default legend form line dash effect.
-     */
-    DashPathEffect getFormLineDashEffect();
-
-    /**
      * Returns true if y-value drawing is enabled, false if not
      *
      * @return
@@ -310,7 +249,7 @@ public interface IDataSet<T extends Entry> {
 
     /**
      * Set this to true to draw y-icons on the chart.
-     *
+     * <p>
      * NOTE (for bar and line charts): if `maxVisibleCount` is reached, no icons will be drawn even
      * if this is enabled
      *

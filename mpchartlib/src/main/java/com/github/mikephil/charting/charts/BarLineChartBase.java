@@ -18,8 +18,6 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.interfaces.dataprovider.BarDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
-import com.github.mikephil.charting.renderer.XAxisRenderer;
-import com.github.mikephil.charting.renderer.YAxisRenderer;
 import com.github.mikephil.charting.utils.MPPointD;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.Utils;
@@ -89,13 +87,8 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
      */
     protected YAxis mAxisRight;
 
-    protected YAxisRenderer mAxisRendererLeft;
-    protected YAxisRenderer mAxisRendererRight;
-
     protected Transformer mLeftAxisTransformer;
     protected Transformer mRightAxisTransformer;
-
-    protected XAxisRenderer mXAxisRenderer;
 
     public BarLineChartBase(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -118,13 +111,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
 
         mLeftAxisTransformer = new Transformer(mViewPortHandler);
         mRightAxisTransformer = new Transformer(mViewPortHandler);
-
-        mAxisRendererLeft = new YAxisRenderer(mViewPortHandler, mAxisLeft, mLeftAxisTransformer);
-        mAxisRendererRight = new YAxisRenderer(mViewPortHandler, mAxisRight, mRightAxisTransformer);
-
-        mXAxisRenderer = new XAxisRenderer(mViewPortHandler, mXAxis, mLeftAxisTransformer);
-
-        //setHighlighter(new ChartHighlighter(this));
 
         mGridBackgroundPaint = new Paint();
         mGridBackgroundPaint.setStyle(Style.FILL);
@@ -158,37 +144,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
             autoScale();
         }
 
-        if (mAxisLeft.isEnabled())
-            mAxisRendererLeft.computeAxis(mAxisLeft.mAxisMinimum, mAxisLeft.mAxisMaximum, mAxisLeft.isInverted());
-
-        if (mAxisRight.isEnabled())
-            mAxisRendererRight.computeAxis(mAxisRight.mAxisMinimum, mAxisRight.mAxisMaximum, mAxisRight.isInverted());
-
-        if (mXAxis.isEnabled())
-            mXAxisRenderer.computeAxis(mXAxis.mAxisMinimum, mXAxis.mAxisMaximum, false);
-
-        mXAxisRenderer.renderAxisLine(canvas);
-        mAxisRendererLeft.renderAxisLine(canvas);
-        mAxisRendererRight.renderAxisLine(canvas);
-
-        if (mXAxis.isDrawGridLinesBehindDataEnabled())
-            mXAxisRenderer.renderGridLines(canvas);
-
-        if (mAxisLeft.isDrawGridLinesBehindDataEnabled())
-            mAxisRendererLeft.renderGridLines(canvas);
-
-        if (mAxisRight.isDrawGridLinesBehindDataEnabled())
-            mAxisRendererRight.renderGridLines(canvas);
-
-        if (mXAxis.isEnabled() && mXAxis.isDrawLimitLinesBehindDataEnabled())
-            mXAxisRenderer.renderLimitLines(canvas);
-
-        if (mAxisLeft.isEnabled() && mAxisLeft.isDrawLimitLinesBehindDataEnabled())
-            mAxisRendererLeft.renderLimitLines(canvas);
-
-        if (mAxisRight.isEnabled() && mAxisRight.isDrawLimitLinesBehindDataEnabled())
-            mAxisRendererRight.renderLimitLines(canvas);
-
         int clipRestoreCount = canvas.save();
 
         if (isClipDataToContentEnabled()) {
@@ -197,32 +152,10 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
         }
 
         mRenderer.drawData(canvas);
-
-        if (!mXAxis.isDrawGridLinesBehindDataEnabled())
-            mXAxisRenderer.renderGridLines(canvas);
-
-        if (!mAxisLeft.isDrawGridLinesBehindDataEnabled())
-            mAxisRendererLeft.renderGridLines(canvas);
-
-        if (!mAxisRight.isDrawGridLinesBehindDataEnabled())
-            mAxisRendererRight.renderGridLines(canvas);
         // Removes clipping rectangle
         canvas.restoreToCount(clipRestoreCount);
 
         mRenderer.drawExtras(canvas);
-
-        if (mXAxis.isEnabled() && !mXAxis.isDrawLimitLinesBehindDataEnabled())
-            mXAxisRenderer.renderLimitLines(canvas);
-
-        if (mAxisLeft.isEnabled() && !mAxisLeft.isDrawLimitLinesBehindDataEnabled())
-            mAxisRendererLeft.renderLimitLines(canvas);
-
-        if (mAxisRight.isEnabled() && !mAxisRight.isDrawLimitLinesBehindDataEnabled())
-            mAxisRendererRight.renderLimitLines(canvas);
-
-        mXAxisRenderer.renderAxisLabels(canvas);
-        mAxisRendererLeft.renderAxisLabels(canvas);
-        mAxisRendererRight.renderAxisLabels(canvas);
 
         if (isClipValuesToContentEnabled()) {
             clipRestoreCount = canvas.save();
@@ -234,8 +167,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
         } else {
             mRenderer.drawValues(canvas);
         }
-
-        // mLegendRenderer.renderLegend(canvas);
 
         drawDescription(canvas);
 
@@ -287,10 +218,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
             mRenderer.initBuffers();
 
         calcMinMax();
-
-        mAxisRendererLeft.computeAxis(mAxisLeft.mAxisMinimum, mAxisLeft.mAxisMaximum, mAxisLeft.isInverted());
-        mAxisRendererRight.computeAxis(mAxisRight.mAxisMinimum, mAxisRight.mAxisMaximum, mAxisRight.isInverted());
-        mXAxisRenderer.computeAxis(mXAxis.mAxisMinimum, mXAxis.mAxisMaximum, false);
 
         calculateOffsets();
     }
@@ -420,17 +347,6 @@ public abstract class BarLineChartBase<T extends ChartData<? extends
             offsetTop += mOffsetsBuffer.top;
             offsetRight += mOffsetsBuffer.right;
             offsetBottom += mOffsetsBuffer.bottom;
-
-            // offsets for y-labels
-            if (mAxisLeft.needsOffset()) {
-                offsetLeft += mAxisLeft.getRequiredWidthSpace(mAxisRendererLeft
-                        .getPaintAxisLabels());
-            }
-
-            if (mAxisRight.needsOffset()) {
-                offsetRight += mAxisRight.getRequiredWidthSpace(mAxisRendererRight
-                        .getPaintAxisLabels());
-            }
 
             if (mXAxis.isEnabled() && mXAxis.isDrawLabelsEnabled()) {
 

@@ -24,11 +24,6 @@ public class BarChartRenderer extends DataRenderer {
 
     protected BarDataProvider mChart;
 
-    /**
-     * the rect object that is used for drawing the bars
-     */
-    protected RectF mBarRect = new RectF();
-
     protected BarBuffer[] mBarBuffers;
 
     protected Paint mShadowPaint;
